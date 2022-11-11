@@ -16922,3 +16922,13 @@ Packages/packages-lock.json
 UserSettings/EditorUserSettings.asset
 UserSettings/Layouts/default-2021.dwlt
 UserSettings/Search.settings
+*.log
+Temp/FSTimeGet-01017d40065ba124f961387c337ce9c7
+Temp/PropertyDatabase_1265138678
+Temp/PropertyDatabase_2066312223
+Temp/UnityLockfile
+Temp/workerlic
+Library/EditorInstance.json
+BEHKFrameWork.sln
+BEHKFrameWork.csproj
+.vs/BEHKFrameWork/v16/.suo
