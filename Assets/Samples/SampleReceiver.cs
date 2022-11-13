@@ -43,7 +43,7 @@ public class SampleReceiver : IListener
         Debug.Log("name  = " + data.Name);
         data.Name = "123";
         Debug.Log("name  = " + data.Name);
-        MessageManager.Instance.SendMessage(Contants.Other.ChangeData, null, data);
+        //MessageManager.Instance.SendMessage(Contants.Other.ChangeData, null, data);
     }
 
     private void Open()

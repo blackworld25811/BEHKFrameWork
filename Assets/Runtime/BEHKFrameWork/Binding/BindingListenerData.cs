@@ -9,16 +9,17 @@ namespace BEHKFrameWork.Binding
 {
     public class BindingListenerData : Singleton<BindingListenerData>
     {
-        private readonly Dictionary<string, PropertyInfo> keyPropertyDictionary;
-
-        private readonly Dictionary<string, FieldInfo> keyFieldDictionary;
+        private readonly Dictionary<string, BindingAttribute> keyAttributeDictionary;
 
         public BindingListenerData()
         {
-            keyPropertyDictionary = new Dictionary<string, PropertyInfo>();
-            keyFieldDictionary = new Dictionary<string, FieldInfo>();
+            keyAttributeDictionary = new Dictionary<string, BindingAttribute>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
         public void Binding(IData data)
         {
             Type type = data.GetType();
@@ -27,25 +28,35 @@ namespace BEHKFrameWork.Binding
             foreach (var propertyInfo in propertyInfos)
             {
                 BindingAttribute bindingAttribute = propertyInfo.GetCustomAttribute<BindingAttribute>();
-                keyPropertyDictionary.Add(bindingAttribute.Key, propertyInfo);
+                bindingAttribute.Object = data;
+                bindingAttribute.PropertyInfo = propertyInfo;
+                bindingAttribute.OldFieldValue = propertyInfo.GetValue(data);
+                keyAttributeDictionary.Add(bindingAttribute.Key, bindingAttribute);
             }
             // check all of field
             FieldInfo[] fieldInfos = type.GetFields();
             foreach (var fieldInfo in fieldInfos)
             {
                 BindingAttribute bindingAttribute = fieldInfo.GetCustomAttribute<BindingAttribute>();
-                keyFieldDictionary.Add(bindingAttribute.Key, fieldInfo);
+                bindingAttribute.Object = data;
+                bindingAttribute.FieldInfo = fieldInfo;
+                bindingAttribute.OldFieldValue = fieldInfo.GetValue(data);
+                keyAttributeDictionary.Add(bindingAttribute.Key, bindingAttribute);
             }
         }
 
-        public PropertyInfo GetProperty(string key)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public BindingAttribute GetBindingAttribute(string key)
         {
-            return keyPropertyDictionary[key];
-        }
-
-        public FieldInfo GetField(string key)
-        {
-            return keyFieldDictionary[key];
+            if (keyAttributeDictionary.TryGetValue(key, out BindingAttribute value))
+            {
+                return value;
+            }
+            return null;
         }
     }
 }

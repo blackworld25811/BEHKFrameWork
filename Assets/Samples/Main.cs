@@ -6,19 +6,24 @@ using UnityEngine;
 
 public class Main : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        Application.targetFrameRate = 30;
         MessageManager.Instance.RegisterListener(nameof(SampleReceiver), new SampleReceiver(), new SampleData());
         MessageManager.Instance.RegisterListener(nameof(OtherReceiver), new OtherReceiver(), new OtherData());
-        MessageManager.Instance.SendMessage(Contants.Sample.Init);
+        Invoke("Delay",1);
 
-        new TestData();
+         
     }
 
-    // Update is called once per frame
+    public void Delay()
+    {
+        MessageManager.Instance.SendMessage(Contants.Sample.Init);
+    }
+
     void Update()
     {
-
+       // SampleData sampleData = MessageManager.Instance.GetListenerData("SampleReceiver") as SampleData;
+       // Debug.Log(sampleData.Name);
     }
 }

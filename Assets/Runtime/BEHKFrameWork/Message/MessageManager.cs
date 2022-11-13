@@ -22,23 +22,11 @@ namespace BEHKFrameWork.Message
         private readonly ConcurrentDictionary<string, IData> dataDictionary;
 
 
-
-        private readonly ConcurrentDictionary<string, List<IListenerGameObject>> listenerGameObjectDictionary;
-
-        private readonly ConcurrentDictionary<string, List<ListenerGameObject>> listenerGameObjectDateDictionary;
-
-        private readonly ConcurrentDictionary<string, string> listenerGameObjectTypeDictionary;
-
-
         public MessageManager()
         {
             observerDictionary = new ConcurrentDictionary<string, Observer>();
             listenerDictionary = new ConcurrentDictionary<string, IListener>();
             dataDictionary = new ConcurrentDictionary<string, IData>();
-
-            listenerGameObjectDictionary = new ConcurrentDictionary<string, List<IListenerGameObject>>();
-            listenerGameObjectDateDictionary = new ConcurrentDictionary<string, List<ListenerGameObject>>();
-            listenerGameObjectTypeDictionary = new ConcurrentDictionary<string, string>();
         }
 
         /// <summary>
@@ -106,56 +94,6 @@ namespace BEHKFrameWork.Message
             {
                 observer.Execute(message);
             }
-        }
-
-
-
-
-
-        public void RegisterListenerGameObject(string name, IListenerGameObject ilistenerGameObject)
-        {
-            if (listenerGameObjectDictionary.TryGetValue(name, out var ilistenerGameObjects))
-            {
-                ilistenerGameObjects.Add(ilistenerGameObject);
-            }
-            else
-            {
-                listenerGameObjectDictionary.TryAdd(name, new List<IListenerGameObject> { ilistenerGameObject });
-            }
-            Observer observer = new Observer(ilistenerGameObject.Execute, ilistenerGameObject);
-            RegisterMessage(name, observer);
-        }
-
-        public void BindingDate(string name, string type, ListenerGameObject listernerGameObject)
-        {
-            if (listenerGameObjectDateDictionary.TryGetValue(name, out var listernerGameObjects))
-            {
-                listernerGameObjects.Add(listernerGameObject);
-            }
-            else
-            {
-                listenerGameObjectDateDictionary.TryAdd(name, new List<ListenerGameObject> { listernerGameObject });
-                listenerGameObjectTypeDictionary.TryAdd(name, type);
-            }
-        }
-
-
-        public List<ListenerGameObject> GetListenerGameObject(string name)
-        {
-            if (listenerGameObjectDateDictionary.TryGetValue(name, out var listenerGameObject))
-            {
-                return listenerGameObject;
-            }
-            return null;
-        }
-
-        public string GetListenerGameObjectType(string name)
-        {
-            if (listenerGameObjectTypeDictionary.TryGetValue(name, out var type))
-            {
-                return type;
-            }
-            return null;
         }
     }
 }

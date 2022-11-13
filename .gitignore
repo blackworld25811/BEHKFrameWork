@@ -4,6 +4,9 @@ obj/
 Packages/
 Temp/
 UserSettings/
+Assets/Unity.VisualScripting.Generated/
+.vs/
 *.csproj
 *.sln
 .vsconfig
+Assets/Unity.VisualScripting.Generated.meta
