@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace BEHKFrameWork.Binding
 {
-    public class BindingComponentValue<T>
+    internal class BindingComponentValue<T>
     {
         private T value;
 

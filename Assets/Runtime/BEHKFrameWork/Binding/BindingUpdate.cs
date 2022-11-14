@@ -6,7 +6,7 @@ using static UnityEngine.PlayerLoop.PreUpdate;
 
 namespace BEHKFrameWork.Binding
 {
-    public class BindingUpdate : MonoBehaviour
+    internal class BindingUpdate : MonoBehaviour
     {
         private static BindingUpdate instance;
 
@@ -68,7 +68,7 @@ namespace BEHKFrameWork.Binding
 
             BindingStringDictionary = new Dictionary<BindingComponentValue<string>, BindingAttribute>();
             BindingIntDictionary = new Dictionary<BindingAttribute, BindingComponentValue<int>>();
-            BindingFloatDictionary = new Dictionary<BindingAttribute, BindingComponentValue<float>>();
+            BindingFloatDictionary = new Dictionary<BindingAttribute, BindingComponentValue<float>>(); 
 
             InvokeRepeating("UpdateStringDictionary", 0, repeatRate);
             InvokeRepeating("UpdateIntDictionary", 0, repeatRate);

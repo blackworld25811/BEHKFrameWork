@@ -40,10 +40,9 @@ public class SampleReceiver : IListener
     private void Init()
     {
         data = MessageManager.Instance.GetListenerData(nameof(SampleReceiver)) as SampleData;
-        Debug.Log("name  = " + data.Name);
         data.Name = "123";
-        Debug.Log("name  = " + data.Name);
         //MessageManager.Instance.SendMessage(Contants.Other.ChangeData, null, data);
+        MessageManager.Instance.BindingMessage(nameof(OtherReceiver),Contants.Other.ChangeData);
     }
 
     private void Open()

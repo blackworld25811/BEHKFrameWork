@@ -2,7 +2,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using BEHKFrameWork.Utility;
 using BEHKFrameWork.Binding;
-
+using System;
 
 namespace BEHKFrameWork.Message
 {
@@ -94,6 +94,12 @@ namespace BEHKFrameWork.Message
             {
                 observer.Execute(message);
             }
+        }
+
+  
+        public void BindingMessage(string messageName)
+        {
+            
         }
     }
 }

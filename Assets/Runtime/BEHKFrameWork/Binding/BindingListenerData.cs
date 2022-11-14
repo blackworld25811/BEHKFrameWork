@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BEHKFrameWork.Binding
 {
-    public class BindingListenerData : Singleton<BindingListenerData>
+    internal class BindingListenerData : Singleton<BindingListenerData>
     {
         private readonly Dictionary<string, BindingAttribute> keyAttributeDictionary;
 

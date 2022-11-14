@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Contants
 {
-    public class Sample
+    public struct Sample
     {
-        public const string Init = "Sample_init";
+        public const string Init = nameof(Sample) + "Init";
 
-        public const string Open = "Sample_open";
+        public const string Open = nameof(Sample) + "Open";
 
-        public const string Close = "Sample_close";
+        public const string Close = nameof(Sample) + "Close";
     }
 
-    public class Other
+    public struct Other
     {
-        public const string ChangeData = "Other_ChangeData";
+        public const string ChangeData = nameof(Other) + "ChangeData";
 
     }
 }

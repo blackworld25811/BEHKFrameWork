@@ -2,7 +2,7 @@ using System;
 
 namespace BEHKFrameWork.Message
 {
-    public class Observer
+    internal class Observer
     {
 
         private Action<Message> listenerHandleMessage;
