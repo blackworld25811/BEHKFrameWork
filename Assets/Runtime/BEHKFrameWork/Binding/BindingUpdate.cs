@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
-using static UnityEngine.PlayerLoop.PreUpdate;
+
 
 namespace BEHKFrameWork.Binding
 {
@@ -32,25 +32,9 @@ namespace BEHKFrameWork.Binding
             }
         }
 
-        private Dictionary<BindingComponentValue<string>, BindingAttribute> bindingStringDictionary;
-
-        private Dictionary<BindingAttribute, BindingComponentValue<int>> bindingIntDictionary;
-
-        private Dictionary<BindingAttribute, BindingComponentValue<float>> bindingFloatDictionary;
+        private List<BindingAttribute> bindingAttributes;
 
         private float repeatRate;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Dictionary<BindingComponentValue<string>, BindingAttribute> BindingStringDictionary
-        { get => bindingStringDictionary; set => bindingStringDictionary = value; }
-
-        public Dictionary<BindingAttribute, BindingComponentValue<int>> BindingIntDictionary
-        { get => bindingIntDictionary; set => bindingIntDictionary = value; }
-
-        public Dictionary<BindingAttribute, BindingComponentValue<float>> BindingFloatDictionary
-        { get => bindingFloatDictionary; set => bindingFloatDictionary = value; }
 
         /// <summary>
         /// 
@@ -65,78 +49,49 @@ namespace BEHKFrameWork.Binding
             {
                 repeatRate = 1f / Application.targetFrameRate;
             }
-
-            BindingStringDictionary = new Dictionary<BindingComponentValue<string>, BindingAttribute>();
-            BindingIntDictionary = new Dictionary<BindingAttribute, BindingComponentValue<int>>();
-            BindingFloatDictionary = new Dictionary<BindingAttribute, BindingComponentValue<float>>(); 
-
-            InvokeRepeating("UpdateStringDictionary", 0, repeatRate);
-            InvokeRepeating("UpdateIntDictionary", 0, repeatRate);
-            InvokeRepeating("UpdateFloatDictionary", 0, repeatRate);
+            bindingAttributes = new List<BindingAttribute>();
+            InvokeRepeating("UpdateBindingAttributes", 0, repeatRate);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private void UpdateStringDictionary()
+        internal void AddBindingAttributes(BindingAttribute bindingAttribute)
         {
-            foreach (var bindingString in bindingStringDictionary)
+            if (bindingAttributes.Contains(bindingAttribute) == false)
             {
-                BindingComponentValue<string> key = bindingString.Key as BindingComponentValue<string>;
-                BindingAttribute value = bindingString.Value as BindingAttribute;
-         
-                if (value.PropertyInfo != null)
-                {
-                    string oldValue = (string)value.OldPropertyValue;
-                    string newValue = (string)value.PropertyInfo.GetValue(value.Object);
-
-                    if (oldValue == null && newValue == null)
-                    {
-                        continue;
-                    }
-                    if (oldValue == null)
-                    {
-                        oldValue = newValue;
-                        key.Value = newValue;
-                        continue;
-                    }
-                    if (oldValue.Equals(newValue) == false)
-                    {
-                        oldValue = newValue;
-                        key.Value = newValue;
-                    }
-                }
-                if (value.FieldInfo != null)
-                {
-                    string oldValue = (string)value.OldFieldValue;
-                    string newValue = (string)value.FieldInfo.GetValue(value.Object);
-                    if (oldValue == null && newValue == null)
-                    {
-                        continue;
-                    }
-                    if (oldValue == null)
-                    {
-                        oldValue = newValue;
-                        key.Value = newValue;
-                        continue;
-                    }
-                    if (oldValue.Equals(newValue) == false)
-                    {
-                        oldValue = newValue;
-                        key.Value = newValue;
-                    }
-                }
+                bindingAttributes.Add(bindingAttribute);
             }
         }
 
-        private void UpdateIntDictionary()
+        private void UpdateBindingAttributes()
         {
+            foreach (var bindingAttribute in bindingAttributes)
+            {
+                // check UI binding              
+                if (bindingAttribute.PropertyInfo != null)
+                {
+                    object oldValue = bindingAttribute.OldPropertyValue;
+                    object newValue = bindingAttribute.PropertyInfo.GetValue(bindingAttribute.Object);
+                    if (oldValue == null && newValue == null)
+                    {
+                        continue;
+                    }
+                    if (oldValue == null || oldValue.Equals(newValue) == false)
+                    {
+                        bindingAttribute.OldPropertyValue = newValue;
+                        foreach (var BindingComponentValue in bindingAttribute.BindingComponentValueList)
+                        {
+                            BindingComponentValue.Value = newValue;
+                        }
+                    }
 
-        }
+                    if (bindingAttribute.FieldInfo != null)
+                    {
 
-        private void UpdateFloatDictionary()
-        {
+                    }
+                }
 
+
+
+            }
         }
     }
 }

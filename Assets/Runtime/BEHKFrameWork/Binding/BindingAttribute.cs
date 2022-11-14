@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace BEHKFrameWork.Binding
@@ -17,6 +18,12 @@ namespace BEHKFrameWork.Binding
         private object oldPropertyValue;
 
         private object oldFieldValue;
+
+        private List<BindingComponentValue<object>> bindingComponentValueList;
+
+        private bool isMessage;
+
+        private List<BindingMessage> bindingMessageList;
 
         /// <summary>
         /// 
@@ -48,10 +55,34 @@ namespace BEHKFrameWork.Binding
         /// </summary>
         public object OldFieldValue { get => oldFieldValue; set => oldFieldValue = value; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsMessage { get => isMessage; set => isMessage = value; }
 
-        public BindingAttribute(string key)
+        /// <summary>
+        /// 
+        /// </summary>
+        internal List<BindingComponentValue<object>> BindingComponentValueList { get => bindingComponentValueList; set => bindingComponentValueList = value; }
+        internal List<BindingMessage> BindingMessageList { get => bindingMessageList; set => bindingMessageList = value; }
+
+        public BindingAttribute(string key, bool isMessage = false)
         {
+            if (BindingComponentValueList == null)
+            {
+                BindingComponentValueList = new List<BindingComponentValue<object>>();
+            }
+            if (BindingMessageList == null)
+            {
+                BindingMessageList = new List<BindingMessage>();
+            }
             Key = key;
+            IsMessage = isMessage;
+        }
+
+        public BindingAttribute(bool isMessage)
+        {
+            IsMessage = isMessage;
         }
     }
 }

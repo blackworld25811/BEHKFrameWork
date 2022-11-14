@@ -22,16 +22,16 @@ namespace BEHKFrameWork.Binding
 
             if (bindingAttribute != null)
             {
-                BindingComponentValue<string> bindingComponentValue = new BindingComponentValue<string>(Text.text);
+                BindingComponentValue<object> bindingComponentValue = new BindingComponentValue<object>(Text.text);
                 bindingComponentValue.OnValueChanged = ChangeText;
-                BindingUpdate.Instance.BindingStringDictionary.Add(bindingComponentValue,bindingAttribute);
+                bindingAttribute.BindingComponentValueList.Add(bindingComponentValue);
+                BindingUpdate.Instance.AddBindingAttributes(bindingAttribute);
             }
-
         }
 
-        private void ChangeText(string text)
+        private void ChangeText(object text)
         {
-            Text.text = text;
+            Text.text = (string)text;
         }
     }
 }

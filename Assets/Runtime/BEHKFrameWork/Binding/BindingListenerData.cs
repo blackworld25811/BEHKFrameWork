@@ -9,7 +9,13 @@ namespace BEHKFrameWork.Binding
 {
     internal class BindingListenerData : Singleton<BindingListenerData>
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly Dictionary<string, BindingAttribute> keyAttributeDictionary;
+
+
+        //private readonly Dictionary<string,>
 
         public BindingListenerData()
         {
@@ -28,6 +34,10 @@ namespace BEHKFrameWork.Binding
             foreach (var propertyInfo in propertyInfos)
             {
                 BindingAttribute bindingAttribute = propertyInfo.GetCustomAttribute<BindingAttribute>();
+                if (bindingAttribute == null)
+                {
+                    continue;
+                }
                 bindingAttribute.Object = data;
                 bindingAttribute.PropertyInfo = propertyInfo;
                 bindingAttribute.OldFieldValue = propertyInfo.GetValue(data);
@@ -38,6 +48,10 @@ namespace BEHKFrameWork.Binding
             foreach (var fieldInfo in fieldInfos)
             {
                 BindingAttribute bindingAttribute = fieldInfo.GetCustomAttribute<BindingAttribute>();
+                if (bindingAttribute == null)
+                {
+                    continue;
+                }
                 bindingAttribute.Object = data;
                 bindingAttribute.FieldInfo = fieldInfo;
                 bindingAttribute.OldFieldValue = fieldInfo.GetValue(data);

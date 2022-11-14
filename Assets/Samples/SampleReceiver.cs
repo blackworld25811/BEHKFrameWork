@@ -41,13 +41,14 @@ public class SampleReceiver : IListener
     {
         data = MessageManager.Instance.GetListenerData(nameof(SampleReceiver)) as SampleData;
         data.Name = "123";
-        //MessageManager.Instance.SendMessage(Contants.Other.ChangeData, null, data);
-        MessageManager.Instance.BindingMessage(nameof(OtherReceiver),Contants.Other.ChangeData);
+
+       // MessageManager.Instance.BindingMessage(data.Name, Contants.Other.ChangeData);
+      // MessageManager.Instance.BindingMessage(data.Name, Contants.Other.ChangeDataSecond);
     }
 
     private void Open()
     {
-
+        data.Name = "456";
     }
 
     private void Close()

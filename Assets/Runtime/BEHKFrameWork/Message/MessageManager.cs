@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BEHKFrameWork.Utility;
 using BEHKFrameWork.Binding;
 using System;
+using System.Reflection;
 
 namespace BEHKFrameWork.Message
 {
@@ -96,10 +97,22 @@ namespace BEHKFrameWork.Message
             }
         }
 
-  
-        public void BindingMessage(string messageName)
+        public void SendMessage(string name, object body)
         {
-            
+            Message message = new Message(name, null, body);
+
+            if (observerDictionary.TryGetValue(name, out var observer))
+            {
+                observer.Execute(message);
+            }
+        }
+
+        public void BindingMessage(object @object, string messageName)
+        {
+            Type type = @object.GetType();
+            PropertyInfo[] propertyInfos = type.GetProperties();
+            FieldInfo[] fieldInfos = type.GetFields();
+           
         }
     }
 }

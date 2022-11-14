@@ -12,6 +12,7 @@ public class OtherReceiver : IListener
         List<string> array = new List<string>
         {
             Contants.Other.ChangeData,
+            Contants.Other.ChangeDataSecond
         };
         return array.ToArray();
     }
@@ -23,6 +24,9 @@ public class OtherReceiver : IListener
             case Contants.Other.ChangeData:
                 ChangeData(message);
                 break;
+            case Contants.Other.ChangeDataSecond:
+                ChangeDataSecond();
+                break;
         }
     }
 
@@ -30,8 +34,12 @@ public class OtherReceiver : IListener
     {
         SampleData data = message.Body as SampleData;
         data.Name = "456";
-        Debug.Log("name  = " + data.Name);
+        //Debug.Log("name  = " + data.Name);
+        Debug.Log("ChangeData");
     }
 
-
+    private void ChangeDataSecond()
+    {
+        Debug.Log("ChangeDataSecond");
+    }
 }
