@@ -7,22 +7,18 @@ namespace BEHKFrameWork.Message
 
         private Action<Message> listenerHandleMessage;
 
-        private object listener;
+        private string listenerName;
 
-        /// <summary>
-        /// transfer listener HandleMessage 
-        /// </summary>
-        public Action<Message> ListenerHandleMessage { get => listenerHandleMessage; set => listenerHandleMessage = value; }
 
         /// <summary>
         /// 
         /// </summary>
-        public object Listener { get => listener; set => listener = value; }
+        public string ListenerName { get => listenerName; set => listenerName = value; }
 
-        public Observer(Action<Message> listenerHandleMessage, object listener)
+        public Observer(string listenerName, Action<Message> listenerHandleMessage)
         {
-            ListenerHandleMessage = listenerHandleMessage;
-            Listener = listener;
+            this.listenerName = listenerName;
+            this.listenerHandleMessage = listenerHandleMessage;
         }
 
         /// <summary>
@@ -31,7 +27,7 @@ namespace BEHKFrameWork.Message
         /// <param name="message"></param>
         public void Execute(Message message)
         {
-            ListenerHandleMessage(message);
+            listenerHandleMessage(message);
         }
     }
 }

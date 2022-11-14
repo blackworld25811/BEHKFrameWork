@@ -65,7 +65,6 @@ namespace BEHKFrameWork.Binding
         {
             foreach (var bindingAttribute in bindingAttributes)
             {
-                // check UI binding              
                 if (bindingAttribute.PropertyInfo != null)
                 {
                     object oldValue = bindingAttribute.OldPropertyValue;
@@ -77,20 +76,23 @@ namespace BEHKFrameWork.Binding
                     if (oldValue == null || oldValue.Equals(newValue) == false)
                     {
                         bindingAttribute.OldPropertyValue = newValue;
+                        // refresh all binding component
                         foreach (var BindingComponentValue in bindingAttribute.BindingComponentValueList)
                         {
                             BindingComponentValue.Value = newValue;
                         }
-                    }
-
-                    if (bindingAttribute.FieldInfo != null)
-                    {
-
+                        // send all binding message
+                        foreach (var bindingMessage in bindingAttribute.BindingMessageList)
+                        {
+                            bindingMessage.Execute(bindingMessage.Message);
+                        }
                     }
                 }
 
+                if (bindingAttribute.FieldInfo != null)
+                {
 
-
+                }
             }
         }
     }

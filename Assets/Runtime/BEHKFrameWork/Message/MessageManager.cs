@@ -47,7 +47,7 @@ namespace BEHKFrameWork.Message
                 var interests = iListener.ListMessageInterests();
                 if (interests.Length > 0)
                 {
-                    Observer observer = new Observer(iListener.HandleMessage, iListener);
+                    Observer observer = new Observer(listenerName, iListener.HandleMessage);
                     // regsiter every message
                     foreach (var interest in interests)
                     {
@@ -107,12 +107,38 @@ namespace BEHKFrameWork.Message
             }
         }
 
-        public void BindingMessage(object @object, string messageName)
+        public void SendMessage(Message message)
         {
-            Type type = @object.GetType();
-            PropertyInfo[] propertyInfos = type.GetProperties();
-            FieldInfo[] fieldInfos = type.GetFields();
-           
+            if (observerDictionary.TryGetValue(message.Name, out var observer))
+            {
+                observer.Execute(message);
+            }
+        }
+
+        public void BindingMessage(string name, string messageName)
+        {
+            MethodBase method = new System.Diagnostics.StackTrace().GetFrame(1).GetMethod();
+            string className = method.ReflectedType.FullName;
+
+            if (dataDictionary.TryGetValue(className, out var data))
+            {
+                Type type = data.GetType();
+                PropertyInfo[] propertyInfos = type.GetProperties();
+                FieldInfo[] fieldInfos = type.GetFields();
+                foreach (var propertyInfo in propertyInfos)
+                {
+                    if (propertyInfo.Name.Equals(name))
+                    {
+                        BindingAttribute bindingAttribute = BindingListenerData.Instance.GetBindingAttribute(propertyInfo);
+                        BindingMessage bindingMessage = new BindingMessage();
+                        Message message = new Message(messageName, null, null);
+                        bindingMessage.Message = message;
+                        bindingMessage.OnMessage = SendMessage;
+                        bindingAttribute.BindingMessageList.Add(bindingMessage);
+                        break;
+                    }
+                }
+            }
         }
     }
 }

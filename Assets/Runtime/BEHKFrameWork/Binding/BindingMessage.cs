@@ -1,21 +1,22 @@
-using BEHKFrameWork.Utility;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace BEHKFrameWork.Binding
 {
-    internal class BindingMessage: Singleton<BindingMessage>
+    internal class BindingMessage
     {
 
-        private Action onMessage;
+        private Action<Message.Message> onMessage;
 
-        public Action OnMessage { get => onMessage; set => onMessage = value; }
+        private Message.Message message;
 
-        public void Binding()
+        public Action<Message.Message> OnMessage { get => onMessage; set => onMessage = value; }
+
+        public Message.Message Message { get => message; set => message = value; }
+
+
+        public void Execute(Message.Message message)
         {
-
+            onMessage(message);
         }
     }
 }

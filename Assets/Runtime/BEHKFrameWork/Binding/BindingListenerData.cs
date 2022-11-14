@@ -14,12 +14,21 @@ namespace BEHKFrameWork.Binding
         /// </summary>
         private readonly Dictionary<string, BindingAttribute> keyAttributeDictionary;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly Dictionary<PropertyInfo, BindingAttribute> propertyInfoAttributeDictionary;
 
-        //private readonly Dictionary<string,>
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly Dictionary<FieldInfo, BindingAttribute> fieldInfoAttributeDictionary;
 
         public BindingListenerData()
         {
             keyAttributeDictionary = new Dictionary<string, BindingAttribute>();
+            propertyInfoAttributeDictionary = new Dictionary<PropertyInfo, BindingAttribute>();
+            fieldInfoAttributeDictionary = new Dictionary<FieldInfo, BindingAttribute>();
         }
 
         /// <summary>
@@ -42,6 +51,7 @@ namespace BEHKFrameWork.Binding
                 bindingAttribute.PropertyInfo = propertyInfo;
                 bindingAttribute.OldFieldValue = propertyInfo.GetValue(data);
                 keyAttributeDictionary.Add(bindingAttribute.Key, bindingAttribute);
+                propertyInfoAttributeDictionary.Add(propertyInfo, bindingAttribute);
             }
             // check all of field
             FieldInfo[] fieldInfos = type.GetFields();
@@ -56,6 +66,7 @@ namespace BEHKFrameWork.Binding
                 bindingAttribute.FieldInfo = fieldInfo;
                 bindingAttribute.OldFieldValue = fieldInfo.GetValue(data);
                 keyAttributeDictionary.Add(bindingAttribute.Key, bindingAttribute);
+                fieldInfoAttributeDictionary.Add(fieldInfo, bindingAttribute);
             }
         }
 
@@ -67,6 +78,24 @@ namespace BEHKFrameWork.Binding
         public BindingAttribute GetBindingAttribute(string key)
         {
             if (keyAttributeDictionary.TryGetValue(key, out BindingAttribute value))
+            {
+                return value;
+            }
+            return null;
+        }
+
+        public BindingAttribute GetBindingAttribute(PropertyInfo propertyInfo)
+        {
+            if (propertyInfoAttributeDictionary.TryGetValue(propertyInfo, out BindingAttribute value))
+            {
+                return value;
+            }
+            return null;
+        }
+
+        public BindingAttribute GetBindingAttribute(FieldInfo fieldInfo)
+        {
+            if (fieldInfoAttributeDictionary.TryGetValue(fieldInfo, out BindingAttribute value))
             {
                 return value;
             }
