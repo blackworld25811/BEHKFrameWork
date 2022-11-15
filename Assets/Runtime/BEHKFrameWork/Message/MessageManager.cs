@@ -117,6 +117,7 @@ namespace BEHKFrameWork.Message
 
         /// <summary>
         /// binding logic to property or field, use message
+        /// differnt property or field can be binding same message logic
         /// </summary>
         /// <param name="name"></param>
         ///  property or field name

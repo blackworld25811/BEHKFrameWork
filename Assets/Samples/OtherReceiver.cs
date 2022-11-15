@@ -34,7 +34,6 @@ public class OtherReceiver : Listener
     {
         SampleData data = message.Body as SampleData;
         data.Name = "456";
-        //Debug.Log("name  = " + data.Name);
         Debug.Log("ChangeData");
     }
 

@@ -43,7 +43,7 @@ public class SampleReceiver : Listener
     {
         data = GetData(nameof(SampleReceiver)) as SampleData;
         data.Name = "123";
-        //MessageManager.Instance.BindingMessage(nameof(data.Name), new Message(Contants.Other.ChangeData,null,data));
+        MessageManager.Instance.BindingMessage(nameof(data.Name), new Message(Contants.Other.ChangeData,null,data));
         MessageManager.Instance.BindingMessage(nameof(data.Id), new Message(Contants.Other.ChangeData, null, data));
     }
 

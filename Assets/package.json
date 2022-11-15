@@ -1,0 +1,11 @@
+{
+    "name": "com.black.BEHKFrameWork",
+    "version": "1.0.0",
+    "description": "A message framework,support binding UI and binding message logic",
+    "displayName": "BEHKFrameWork",
+    "author": {
+        "name": "Black",
+        "email": "blackworld25811@gmail.com",
+        "url": "https://github.com/blackworld25811"
+    }
+}
