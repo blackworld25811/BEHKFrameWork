@@ -13,6 +13,13 @@ namespace BEHKFrameWork.Binding
         /// <summary>
         /// 
         /// </summary>
+        private List<BindingAttribute> bindingAttributes;
+
+        private float repeatRate;
+
+        /// <summary>
+        /// 
+        /// </summary>
         internal static BindingUpdate Instance
         {
             get
@@ -32,10 +39,6 @@ namespace BEHKFrameWork.Binding
             }
         }
 
-        private List<BindingAttribute> bindingAttributes;
-
-        private float repeatRate;
-
         /// <summary>
         /// 
         /// </summary>
@@ -53,6 +56,10 @@ namespace BEHKFrameWork.Binding
             InvokeRepeating("UpdateBindingAttributes", 0, repeatRate);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bindingAttribute"></param>
         internal void AddBindingAttributes(BindingAttribute bindingAttribute)
         {
             if (bindingAttributes.Contains(bindingAttribute) == false)
@@ -61,6 +68,9 @@ namespace BEHKFrameWork.Binding
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void UpdateBindingAttributes()
         {
             foreach (var bindingAttribute in bindingAttributes)
@@ -91,7 +101,26 @@ namespace BEHKFrameWork.Binding
 
                 if (bindingAttribute.FieldInfo != null)
                 {
-
+                    object oldValue = bindingAttribute.OldFieldValue;
+                    object newValue = bindingAttribute.FieldInfo.GetValue(bindingAttribute.Object);
+                    if (oldValue == null && newValue == null)
+                    {
+                        continue;
+                    }
+                    if (oldValue == null || oldValue.Equals(newValue) == false)
+                    {
+                        bindingAttribute.OldFieldValue = newValue;
+                        // refresh all binding component
+                        foreach (var BindingComponentValue in bindingAttribute.BindingComponentValueList)
+                        {
+                            BindingComponentValue.Value = newValue;
+                        }
+                        // send all binding message
+                        foreach (var bindingMessage in bindingAttribute.BindingMessageList)
+                        {
+                            bindingMessage.Execute(bindingMessage.Message);
+                        }
+                    }
                 }
             }
         }

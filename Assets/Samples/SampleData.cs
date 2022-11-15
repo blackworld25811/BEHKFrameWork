@@ -10,8 +10,8 @@ public class SampleData : IData
 
     private string id;
 
-    [Binding("Text_0", true)]
+    [Binding("Text_0")]
     public string Name { get => name; set => name = value; }
-    //[Binding(true)]
+     
     public string Id { get => id; set => id = value; }
 }

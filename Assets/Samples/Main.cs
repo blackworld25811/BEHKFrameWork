@@ -14,7 +14,6 @@ public class Main : MonoBehaviour
         MessageManager.Instance.RegisterListener(nameof(OtherReceiver), new OtherReceiver(), new OtherData());
       
         Invoke("Delay",1);
-        Invoke("Delay1", 2);
     }
 
     public void Delay()
@@ -22,8 +21,4 @@ public class Main : MonoBehaviour
         MessageManager.Instance.SendMessage(Contants.Sample.Init);
     }
 
-    public void Delay1()
-    {
-        MessageManager.Instance.SendMessage(Contants.Sample.Open);
-    }
 }

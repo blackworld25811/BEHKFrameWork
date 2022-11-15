@@ -21,8 +21,6 @@ namespace BEHKFrameWork.Binding
 
         private List<BindingComponentValue<object>> bindingComponentValueList;
 
-        private bool isMessage;
-
         private List<BindingMessage> bindingMessageList;
 
         /// <summary>
@@ -58,15 +56,18 @@ namespace BEHKFrameWork.Binding
         /// <summary>
         /// 
         /// </summary>
-        public bool IsMessage { get => isMessage; set => isMessage = value; }
+        internal List<BindingComponentValue<object>> BindingComponentValueList { get => bindingComponentValueList; set => bindingComponentValueList = value; }
 
         /// <summary>
         /// 
         /// </summary>
-        internal List<BindingComponentValue<object>> BindingComponentValueList { get => bindingComponentValueList; set => bindingComponentValueList = value; }
         internal List<BindingMessage> BindingMessageList { get => bindingMessageList; set => bindingMessageList = value; }
 
-        public BindingAttribute(string key, bool isMessage = false)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        public BindingAttribute(string key)
         {
             if (BindingComponentValueList == null)
             {
@@ -77,12 +78,6 @@ namespace BEHKFrameWork.Binding
                 BindingMessageList = new List<BindingMessage>();
             }
             Key = key;
-            IsMessage = isMessage;
-        }
-
-        public BindingAttribute(bool isMessage)
-        {
-            IsMessage = isMessage;
         }
     }
 }

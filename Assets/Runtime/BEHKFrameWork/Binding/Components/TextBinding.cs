@@ -7,7 +7,7 @@ using BEHKFrameWork.Message;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BEHKFrameWork.Binding
+namespace BEHKFrameWork.Binding.Component
 {
     public class TextBinding : MonoBehaviour
     {

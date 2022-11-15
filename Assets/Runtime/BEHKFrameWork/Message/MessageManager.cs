@@ -14,7 +14,7 @@ namespace BEHKFrameWork.Message
         /// </summary>
         private readonly ConcurrentDictionary<string, Observer> observerDictionary;
         /// <summary>
-        /// all of listeners,listener'every message must be have a observer
+        /// all of listeners,listener's every message must be have a observer
         /// </summary>
         private readonly ConcurrentDictionary<string, IListener> listenerDictionary;
         /// <summary>
@@ -58,7 +58,7 @@ namespace BEHKFrameWork.Message
         }
 
         /// <summary>
-        /// 
+        /// get one listerner's private data
         /// </summary>
         /// <param name="listenerName"></param>
         /// <returns></returns>
@@ -115,8 +115,14 @@ namespace BEHKFrameWork.Message
             }
         }
 
-        public void BindingMessage(string name, string messageName)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="message"></param>
+        public void BindingMessage(string name, Message message)
         {
+            // get listener name
             MethodBase method = new System.Diagnostics.StackTrace().GetFrame(1).GetMethod();
             string className = method.ReflectedType.FullName;
 
@@ -131,7 +137,18 @@ namespace BEHKFrameWork.Message
                     {
                         BindingAttribute bindingAttribute = BindingListenerData.Instance.GetBindingAttribute(propertyInfo);
                         BindingMessage bindingMessage = new BindingMessage();
-                        Message message = new Message(messageName, null, null);
+                        bindingMessage.Message = message;
+                        bindingMessage.OnMessage = SendMessage;
+                        bindingAttribute.BindingMessageList.Add(bindingMessage);
+                        break;
+                    }
+                }
+                foreach (var fieldInfo in fieldInfos)
+                {
+                    if (fieldInfo.Name.Equals(name))
+                    {
+                        BindingAttribute bindingAttribute = BindingListenerData.Instance.GetBindingAttribute(fieldInfo);
+                        BindingMessage bindingMessage = new BindingMessage();
                         bindingMessage.Message = message;
                         bindingMessage.OnMessage = SendMessage;
                         bindingAttribute.BindingMessageList.Add(bindingMessage);
