@@ -1,9 +1,9 @@
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using BEHKFrameWork.Utility;
 using BEHKFrameWork.Binding;
 using System;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace BEHKFrameWork.Message
 {
@@ -16,7 +16,7 @@ namespace BEHKFrameWork.Message
         /// <summary>
         /// all of listeners,listener's every message must be have a observer
         /// </summary>
-        private readonly ConcurrentDictionary<string, IListener> listenerDictionary;
+        private readonly ConcurrentDictionary<string, Listener> listenerDictionary;
         /// <summary>
         /// the listener private data
         /// </summary>
@@ -26,7 +26,7 @@ namespace BEHKFrameWork.Message
         public MessageManager()
         {
             observerDictionary = new ConcurrentDictionary<string, Observer>();
-            listenerDictionary = new ConcurrentDictionary<string, IListener>();
+            listenerDictionary = new ConcurrentDictionary<string, Listener>();
             dataDictionary = new ConcurrentDictionary<string, IData>();
         }
 
@@ -37,17 +37,17 @@ namespace BEHKFrameWork.Message
         /// listener's name,is unique
         /// <param name="iListener"></param>
         /// <param name="iData"></param>
-        public void RegisterListener(string listenerName, IListener iListener, IData iData)
+        public void RegisterListener(string listenerName, Listener listener, IData iData)
         {
-            if (listenerDictionary.TryAdd(listenerName, iListener))
+            if (listenerDictionary.TryAdd(listenerName, listener))
             {
                 dataDictionary.TryAdd(listenerName, iData);
                 BindingListenerData.Instance.Binding(iData);
 
-                var interests = iListener.ListMessageInterests();
+                var interests = listener.ListMessageInterests();
                 if (interests.Length > 0)
                 {
-                    Observer observer = new Observer(listenerName, iListener.HandleMessage);
+                    Observer observer = new Observer(listenerName, listener.HandleMessage);
                     // regsiter every message
                     foreach (var interest in interests)
                     {
@@ -62,7 +62,7 @@ namespace BEHKFrameWork.Message
         /// </summary>
         /// <param name="listenerName"></param>
         /// <returns></returns>
-        public IData GetListenerData(string listenerName)
+        internal IData GetListenerData(string listenerName)
         {
             if (dataDictionary.TryGetValue(listenerName, out var data))
             {
@@ -116,10 +116,12 @@ namespace BEHKFrameWork.Message
         }
 
         /// <summary>
-        /// 
+        /// binding logic to property or field, use message
         /// </summary>
         /// <param name="name"></param>
+        ///  property or field name
         /// <param name="message"></param>
+        /// create a new logic message
         public void BindingMessage(string name, Message message)
         {
             // get listener name
@@ -129,25 +131,14 @@ namespace BEHKFrameWork.Message
             if (dataDictionary.TryGetValue(className, out var data))
             {
                 Type type = data.GetType();
-                PropertyInfo[] propertyInfos = type.GetProperties();
-                FieldInfo[] fieldInfos = type.GetFields();
-                foreach (var propertyInfo in propertyInfos)
+                BindingListenerData.Instance.Binding(data);
+                List<DataReflectionInformation> dataReflectionInformation = BindingListenerData.Instance.GetDataReflectionInformation(data);
+                foreach (var information in dataReflectionInformation)
                 {
-                    if (propertyInfo.Name.Equals(name))
+                    string informationName = information.Name;
+                    BindingAttribute bindingAttribute = information.BindingAttribute;
+                    if (name.Equals(informationName))
                     {
-                        BindingAttribute bindingAttribute = BindingListenerData.Instance.GetBindingAttribute(propertyInfo);
-                        BindingMessage bindingMessage = new BindingMessage();
-                        bindingMessage.Message = message;
-                        bindingMessage.OnMessage = SendMessage;
-                        bindingAttribute.BindingMessageList.Add(bindingMessage);
-                        break;
-                    }
-                }
-                foreach (var fieldInfo in fieldInfos)
-                {
-                    if (fieldInfo.Name.Equals(name))
-                    {
-                        BindingAttribute bindingAttribute = BindingListenerData.Instance.GetBindingAttribute(fieldInfo);
                         BindingMessage bindingMessage = new BindingMessage();
                         bindingMessage.Message = message;
                         bindingMessage.OnMessage = SendMessage;

@@ -13,12 +13,18 @@ public class Main : MonoBehaviour
         MessageManager.Instance.RegisterListener(nameof(SampleReceiver), new SampleReceiver(), new SampleData());
         MessageManager.Instance.RegisterListener(nameof(OtherReceiver), new OtherReceiver(), new OtherData());
       
-        Invoke("Delay",1);
+        Invoke("Delay_0", 1);
+        Invoke("Delay_1", 2);
     }
 
-    public void Delay()
+    public void Delay_0()
     {
         MessageManager.Instance.SendMessage(Contants.Sample.Init);
+    }
+
+    public void Delay_1()
+    {
+        MessageManager.Instance.SendMessage(Contants.Sample.Open);
     }
 
 }

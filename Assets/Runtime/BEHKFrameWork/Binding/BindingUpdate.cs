@@ -11,14 +11,17 @@ namespace BEHKFrameWork.Binding
         private static BindingUpdate instance;
 
         /// <summary>
-        /// 
+        /// all of bindingAttribute to be refresh
         /// </summary>
         private List<BindingAttribute> bindingAttributes;
 
+        /// <summary>
+        /// refresh frame time
+        /// </summary>
         private float repeatRate;
 
         /// <summary>
-        /// 
+        /// the monobehaviour instance,is run in background
         /// </summary>
         internal static BindingUpdate Instance
         {
@@ -40,12 +43,13 @@ namespace BEHKFrameWork.Binding
         }
 
         /// <summary>
-        /// 
+        /// initialize
         /// </summary>
         private void Init()
         {
             if (Application.targetFrameRate == -1)
             {
+                // the max frame time
                 repeatRate = 1f / 120;
             }
             else
@@ -57,7 +61,7 @@ namespace BEHKFrameWork.Binding
         }
 
         /// <summary>
-        /// 
+        /// add a bindingAttribute,ui and message logic all need
         /// </summary>
         /// <param name="bindingAttribute"></param>
         internal void AddBindingAttributes(BindingAttribute bindingAttribute)
@@ -69,7 +73,7 @@ namespace BEHKFrameWork.Binding
         }
 
         /// <summary>
-        /// 
+        /// refresh all porerty or field change and excute they logic
         /// </summary>
         private void UpdateBindingAttributes()
         {

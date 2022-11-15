@@ -25,7 +25,6 @@ namespace BEHKFrameWork.Binding.Component
                 BindingComponentValue<object> bindingComponentValue = new BindingComponentValue<object>(Text.text);
                 bindingComponentValue.OnValueChanged = ChangeText;
                 bindingAttribute.BindingComponentValueList.Add(bindingComponentValue);
-                BindingUpdate.Instance.AddBindingAttributes(bindingAttribute);
             }
         }
 

@@ -12,7 +12,7 @@ namespace BEHKFrameWork.Binding
         private Action<T> onValueChanged;
 
         /// <summary>
-        /// 
+        /// the ui change value
         /// </summary>
         public T Value
         {
@@ -25,7 +25,7 @@ namespace BEHKFrameWork.Binding
         }
 
         /// <summary>
-        /// 
+        /// the ui change logic
         /// </summary>
         public Action<T> OnValueChanged { get => onValueChanged; set => onValueChanged = value; }
 
