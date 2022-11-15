@@ -1,11 +1,28 @@
 {
-    "name": "com.black.BEHKFrameWork",
+    "name": "com.black.behkframework",
     "version": "1.0.0",
     "description": "A message framework,support binding UI and binding message logic",
     "displayName": "BEHKFrameWork",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/blackworld25811/BEHKFrameWork.git"
+    },
     "author": {
         "name": "Black",
         "email": "blackworld25811@gmail.com",
         "url": "https://github.com/blackworld25811"
-    }
+    },
+    "dependencies": {},
+    "keywords": [
+        "UI",
+        "Data",
+        "Framework"
+    ],
+    "samples": [
+        {
+            "displayName": "Samples",
+            "description": "Samples",
+            "path": "Samples"
+        }
+    ]
 }
