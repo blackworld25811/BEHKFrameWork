@@ -16,7 +16,7 @@ namespace BEHKFrameWork.Message
         /// <summary>
         /// all of listeners,listener's every message must be have a observer
         /// </summary>
-        private readonly ConcurrentDictionary<string, Listener> listenerDictionary;
+        private readonly ConcurrentDictionary<string, IListener> listenerDictionary;
         /// <summary>
         /// the listener private data
         /// </summary>
@@ -26,7 +26,7 @@ namespace BEHKFrameWork.Message
         public MessageManager()
         {
             observerDictionary = new ConcurrentDictionary<string, Observer>();
-            listenerDictionary = new ConcurrentDictionary<string, Listener>();
+            listenerDictionary = new ConcurrentDictionary<string, IListener>();
             dataDictionary = new ConcurrentDictionary<string, IData>();
         }
 
@@ -37,7 +37,7 @@ namespace BEHKFrameWork.Message
         /// listener's name,is unique
         /// <param name="iListener"></param>
         /// <param name="iData"></param>
-        public void RegisterListener(string listenerName, Listener listener, IData iData)
+        public void RegisterListener(string listenerName, IListener listener, IData iData)
         {
             if (listenerDictionary.TryAdd(listenerName, listener))
             {
@@ -62,8 +62,14 @@ namespace BEHKFrameWork.Message
         /// </summary>
         /// <param name="listenerName"></param>
         /// <returns></returns>
-        internal IData GetListenerData(string listenerName)
+        public IData GetListenerData(string listenerName)
         {
+            string className = Utility.Utility.GetCallClassName();
+
+            if (listenerName.Equals(className) == false)
+            {
+               throw new Exception("listenerName must be same to call class");
+            }
             if (dataDictionary.TryGetValue(listenerName, out var data))
             {
                 return data;
@@ -125,9 +131,7 @@ namespace BEHKFrameWork.Message
         /// create a new logic message
         public void BindingMessage(string name, Message message)
         {
-            // get listener name
-            MethodBase method = new System.Diagnostics.StackTrace().GetFrame(1).GetMethod();
-            string className = method.ReflectedType.FullName;
+            string className = Utility.Utility.GetCallClassName();
 
             if (dataDictionary.TryGetValue(className, out var data))
             {

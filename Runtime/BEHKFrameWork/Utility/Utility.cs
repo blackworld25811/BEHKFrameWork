@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Reflection;
 using UnityEngine;
 //using ZXing;
 //using ZXing.QrCode;
@@ -121,6 +122,12 @@ namespace BEHKFrameWork.Utility
                     Object.Destroy(father.GetChild(i).gameObject);
                 }
             }
+        }
+
+        public static string GetCallClassName()
+        {
+            MethodBase method = new System.Diagnostics.StackTrace().GetFrame(3).GetMethod();
+            return method.ReflectedType.FullName;
         }
     }
 }

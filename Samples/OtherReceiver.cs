@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OtherReceiver : Listener
+public class OtherReceiver : IListener
 {
     private OtherData data;
 
-    public override string[] ListMessageInterests()
+    public  string[] ListMessageInterests()
     {
         List<string> array = new List<string>
         {
@@ -17,7 +17,7 @@ public class OtherReceiver : Listener
         return array.ToArray();
     }
 
-    public override void HandleMessage(Message message)
+    public  void HandleMessage(Message message)
     {
         switch (message.Name)
         {
@@ -32,8 +32,9 @@ public class OtherReceiver : Listener
 
     private void ChangeData(Message message)
     {
-        SampleData data = message.Body as SampleData;
-        data.Name = "456";
+        OtherData data = MessageManager.Instance.GetListenerData(nameof(OtherReceiver)) as OtherData;
+        //SampleData data = message.Body as SampleData;
+        //data.Name = "456";
         Debug.Log("ChangeData");
     }
 

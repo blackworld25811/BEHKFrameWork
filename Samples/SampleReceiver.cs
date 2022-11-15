@@ -2,13 +2,13 @@ using BEHKFrameWork.Message;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SampleReceiver : Listener
+public class SampleReceiver : IListener
 {
     private SampleData data;
 
     #region logic register
 
-    public override string[] ListMessageInterests()
+    public string[] ListMessageInterests()
     {
         List<string> array = new List<string>
         {
@@ -19,7 +19,7 @@ public class SampleReceiver : Listener
         return array.ToArray();
     }
 
-    public override void HandleMessage(Message message)
+    public void HandleMessage(Message message)
     {
         switch (message.Name)
         {
@@ -41,7 +41,7 @@ public class SampleReceiver : Listener
     #region logic
     private void Init()
     {
-        data = GetData(nameof(SampleReceiver)) as SampleData;
+        data = MessageManager.Instance.GetListenerData(nameof(SampleReceiver)) as SampleData;
         data.Name = "123";
         MessageManager.Instance.BindingMessage(nameof(data.Name), new Message(Contants.Other.ChangeData,null,data));
         MessageManager.Instance.BindingMessage(nameof(data.Id), new Message(Contants.Other.ChangeData, null, data));
