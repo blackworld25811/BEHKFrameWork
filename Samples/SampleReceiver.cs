@@ -1,20 +1,18 @@
 using BEHKFrameWork.Message;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class SampleReceiver : IListener
 {
     private SampleData data;
 
     #region logic register
-
     public string[] ListMessageInterests()
     {
         List<string> array = new List<string>
         {
             Contants.Sample.Init,
             Contants.Sample.Open,
-            Contants.Sample.Close,
+            Contants.Sample.Close
         };
         return array.ToArray();
     }
@@ -34,7 +32,6 @@ public class SampleReceiver : IListener
                 break;
         }
     }
-
     #endregion
 
 

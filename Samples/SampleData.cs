@@ -1,8 +1,5 @@
-using BEHKFrameWork.Binding;
 using BEHKFrameWork.Message;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using BEHKFrameWork.Binding;
 
 public class SampleData : IData
 {
