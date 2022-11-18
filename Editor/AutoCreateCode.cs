@@ -37,12 +37,13 @@ namespace BEHKFrameWork.Editor
             }
             else
             {
-                FileStream file = new FileStream(fullPath, FileMode.Open);
-                StreamWriter streamWriter = new StreamWriter(file, Encoding.UTF8);
-                streamWriter.Write(content);
-                streamWriter.Flush();
-                streamWriter.Close();
-                file.Close();
+               /*FileStream file = new FileStream(fullPath, FileMode.Open);
+                 StreamWriter streamWriter = new StreamWriter(file, Encoding.UTF8);
+                 streamWriter.Write(content);
+                 streamWriter.Flush();
+                 streamWriter.Close();
+                 file.Close();
+               */
             }
         }
 
