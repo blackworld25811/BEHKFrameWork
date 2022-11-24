@@ -1,3 +1,4 @@
+# if UNITY_EDITOR
 using System.IO;
 using System.Text;
 using UnityEditor;
@@ -128,3 +129,4 @@ namespace BEHKFrameWork.Editor
         }
     }
 }
+# endif
