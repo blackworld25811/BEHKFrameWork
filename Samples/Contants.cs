@@ -11,6 +11,7 @@ public class Contants
         public const string Open = nameof(Sample) + nameof(Open);
 
         public const string Close = nameof(Sample) + nameof(Close);
+        
     }
 
     public struct Other

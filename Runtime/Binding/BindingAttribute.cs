@@ -26,42 +26,74 @@ namespace BEHKFrameWork.Binding
         /// <summary>
         /// custom UI key
         /// </summary>
-        public string Key { get => key; set => key = value; }
+        public string Key
+        {
+            get => key;
+            set => key = value;
+        }
 
         /// <summary>
         /// the class of property or field
         /// </summary>
-        public object Object { get => @object; set => @object = value; }
+        public object Object
+        {
+            get => @object;
+            set => @object = value;
+        }
 
         /// <summary>
         /// reflection property
         /// </summary>
-        public PropertyInfo PropertyInfo { get => propertyInfo; set => propertyInfo = value; }
+        public PropertyInfo PropertyInfo
+        {
+            get => propertyInfo;
+            set => propertyInfo = value;
+        }
 
         /// <summary>
         /// reflection field
         /// </summary>
-        public FieldInfo FieldInfo { get => fieldInfo; set => fieldInfo = value; }
+        public FieldInfo FieldInfo
+        {
+            get => fieldInfo;
+            set => fieldInfo = value;
+        }
 
         /// <summary>
         ///  record the property old value,compare to new value
         /// </summary>
-        public object OldPropertyValue { get => oldPropertyValue; set => oldPropertyValue = value; }
+        public object OldPropertyValue
+        {
+            get => oldPropertyValue;
+            set => oldPropertyValue = value;
+        }
 
         /// <summary>
         ///  record the field old value,compare to new value
         /// </summary>
-        public object OldFieldValue { get => oldFieldValue; set => oldFieldValue = value; }
+        public object OldFieldValue
+        {
+            get => oldFieldValue;
+            set => oldFieldValue = value;
+        }
 
         /// <summary>
         /// UI componet binding information
         /// </summary>
-        internal List<BindingComponentValue<object>> BindingComponentValueList { get => bindingComponentValueList; set => bindingComponentValueList = value; }
+        internal List<BindingComponentValue<object>> BindingComponentValueList
+        {
+            get => bindingComponentValueList;
+            set => bindingComponentValueList = value;
+        }
 
         /// <summary>
         /// logic message binding information
         /// </summary>
-        internal List<BindingMessage> BindingMessageList { get => bindingMessageList; set => bindingMessageList = value; }
+        internal List<BindingMessage> BindingMessageList
+        {
+            get => bindingMessageList;
+            set => bindingMessageList = value;
+        }
 
         /// <summary>
         /// create bindingAttribute, uesed the UI component key
@@ -73,10 +105,12 @@ namespace BEHKFrameWork.Binding
             {
                 BindingComponentValueList = new List<BindingComponentValue<object>>();
             }
+
             if (BindingMessageList == null)
             {
                 BindingMessageList = new List<BindingMessage>();
             }
+
             Key = key;
         }
     }

@@ -1,9 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Security.Cryptography;
-using BEHKFrameWork.Message;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,24 +7,24 @@ namespace BEHKFrameWork.Binding.Component
     {
         public string Key;
 
-        public Text Text;
-
+        private Text Text;
 
         private void Start()
         {
             BindingAttribute bindingAttribute = BindingListenerData.Instance.GetBindingAttribute(Key);
+            if (bindingAttribute == null) return;
 
-            if (bindingAttribute != null)
+            Text = GetComponent<Text>();
+            BindingComponentValue<object> bindingComponentValue = new BindingComponentValue<object>(Text.text)
             {
-                BindingComponentValue<object> bindingComponentValue = new BindingComponentValue<object>(Text.text);
-                bindingComponentValue.OnValueChanged = ChangeText;
-                bindingAttribute.BindingComponentValueList.Add(bindingComponentValue);
-            }
+                OnValueChanged = ChangeText
+            };
+            bindingAttribute.BindingComponentValueList.Add(bindingComponentValue);
         }
 
         private void ChangeText(object text)
         {
-            Text.text = (string)text;
+            Text.text =  text as string;
         }
     }
 }

@@ -9,12 +9,20 @@ namespace BEHKFrameWork.Binding
         /// <summary>
         /// property or field name
         /// </summary>
-        public string Name { get => name; set => name = value; }
+        public string Name
+        {
+            get => name;
+            set => name = value;
+        }
 
         /// <summary>
         /// property or field attribute
         /// </summary>
-        public BindingAttribute BindingAttribute { get => bindingAttribute; set => bindingAttribute = value; }
+        public BindingAttribute BindingAttribute
+        {
+            get => bindingAttribute;
+            set => bindingAttribute = value;
+        }
 
 
         public DataReflectionInformation(string name, BindingAttribute bindingAttribute)
