@@ -44,13 +44,14 @@ public class SampleReceiver : IListener
         MessageManager.Instance.BindingMessage(nameof(data.Name), new Message(Contants.Other.ChangeData, null, data));
         MessageManager.Instance.BindingMessage(nameof(data.Id), new Message(Contants.Other.ChangeData, null, data));
         data.Button = Button_0;
-       
+        data.Active = false;
     }
 
     private void Open()
     {
         data.Name = "456";
         data.Id = "change";
+        data.Active = true;
     }
 
     private void Close()
