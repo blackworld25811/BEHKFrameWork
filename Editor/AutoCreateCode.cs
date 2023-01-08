@@ -54,6 +54,7 @@ namespace BEHKFrameWork.Editor
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("using BEHKFrameWork.Message;\n");
             stringBuilder.Append("using System.Collections.Generic;\n");
+            stringBuilder.Append("using static Constants;\n");
 
             stringBuilder.Append("\n");
             stringBuilder.Append("public class " + name + "Receiver : IListener\n");
@@ -65,7 +66,7 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("    {\n");
             stringBuilder.Append("        List<string> array = new List<string>\n");
             stringBuilder.Append("        {\n");
-            stringBuilder.Append("           Contants." + name + ".Init\n");
+            stringBuilder.Append("           " + name + ".Init\n");
             stringBuilder.Append("        };\n");
             stringBuilder.Append("        return array.ToArray();\n");
             stringBuilder.Append("    }\n");
@@ -75,7 +76,7 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("    {\n");
             stringBuilder.Append("        switch (message.Name)\n");
             stringBuilder.Append("        {\n");
-            stringBuilder.Append("            case Contants." + name + ".Init:\n");
+            stringBuilder.Append("            case " + name + ".Init:\n");
             stringBuilder.Append("                Init();\n");
             stringBuilder.Append("                break;\n");
             stringBuilder.Append("        }\n");
