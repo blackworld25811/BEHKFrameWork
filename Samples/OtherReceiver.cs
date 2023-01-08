@@ -33,8 +33,8 @@ public class OtherReceiver : IListener
     private void ChangeData(Message message)
     {
         OtherData data = MessageManager.Instance.GetListenerData(nameof(OtherReceiver)) as OtherData;
-        SampleData data = message.Body as SampleData;
-        data.Name = "456";
+        //SampleData data = message.Body as SampleData;
+        //data.Name = "456";
         Debug.Log("ChangeData");
     }
 
