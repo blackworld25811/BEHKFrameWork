@@ -61,7 +61,8 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("{\n");
             stringBuilder.Append("    private " + name + "Data data;\n");
             stringBuilder.Append("\n");
-            stringBuilder.Append("    #region logic register\n");
+            stringBuilder.Append("    #region register\n");
+            stringBuilder.Append("\n");
             stringBuilder.Append("    public string[] ListMessageInterests()\n");
             stringBuilder.Append("    {\n");
             stringBuilder.Append("        List<string> array = new List<string>\n");
@@ -81,14 +82,24 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("                break;\n");
             stringBuilder.Append("        }\n");
             stringBuilder.Append("    }\n");
+            stringBuilder.Append("\n");
             stringBuilder.Append("    #endregion\n");
+            stringBuilder.Append("\n");
 
             stringBuilder.Append("\n");
-            stringBuilder.Append("    #region logic\n");
+            stringBuilder.Append("    #region messagelogic\n");
+            stringBuilder.Append("\n");
             stringBuilder.Append("    private void Init()\n");
             stringBuilder.Append("    {\n");
             stringBuilder.Append("        data = MessageManager.Instance.GetListenerData(nameof(" + name + "Receiver)) as " + name + "Data;\n");
             stringBuilder.Append("    }\n");
+            stringBuilder.Append("\n");
+            stringBuilder.Append("    #endregion\n");
+            stringBuilder.Append("\n");
+
+            stringBuilder.Append("\n");
+            stringBuilder.Append("    #region logic\n");
+            stringBuilder.Append("\n");
             stringBuilder.Append("    #endregion\n");
             stringBuilder.Append("}\n");
 
