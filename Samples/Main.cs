@@ -19,12 +19,12 @@ public class Main : MonoBehaviour
 
     public void Delay_0()
     {
-        MessageManager.Instance.SendMessage(Contants.Sample.Init);
+        MessageManager.Instance.SendMessage(Constants.Sample.Init);
     }
 
     public void Delay_1()
     {
-        MessageManager.Instance.SendMessage(Contants.Sample.Open);
+        MessageManager.Instance.SendMessage(Constants.Sample.Open);
     }
 
 }

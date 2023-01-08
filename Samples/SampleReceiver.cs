@@ -1,6 +1,7 @@
 using BEHKFrameWork.Message;
 using System.Collections.Generic;
 using UnityEngine;
+using static Constants;  
 
 public class SampleReceiver : IListener
 {
@@ -11,9 +12,9 @@ public class SampleReceiver : IListener
     {
         List<string> array = new List<string>
         {
-            Contants.Sample.Init,
-            Contants.Sample.Open,
-            Contants.Sample.Close,
+            Sample.Init,
+            Sample.Open,
+            Sample.Close,
         };
         return array.ToArray();
     }
@@ -22,13 +23,13 @@ public class SampleReceiver : IListener
     {
         switch (message.Name)
         {
-            case Contants.Sample.Init:
+            case Sample.Init:
                 Init();
                 break;
-            case Contants.Sample.Open:
+            case Sample.Open:
                 Open();
                 break;
-            case Contants.Sample.Close:
+            case Sample.Close:
                 Close();
                 break;
         }
@@ -41,8 +42,8 @@ public class SampleReceiver : IListener
     {
         data = MessageManager.Instance.GetListenerData(nameof(SampleReceiver)) as SampleData;
         data.Name = "123";
-        MessageManager.Instance.BindingMessage(nameof(data.Name), new Message(Contants.Other.ChangeData, null, data));
-        MessageManager.Instance.BindingMessage(nameof(data.Id), new Message(Contants.Other.ChangeData, null, data));
+        MessageManager.Instance.BindingMessage(nameof(data.Name), new Message(Other.ChangeData, null, data));
+        MessageManager.Instance.BindingMessage(nameof(data.Id), new Message(Other.ChangeData, null, data));
         data.Button = Button_0;
         data.Active = false;
     }

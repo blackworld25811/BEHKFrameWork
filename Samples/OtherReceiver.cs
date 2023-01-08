@@ -2,6 +2,7 @@ using BEHKFrameWork.Message;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Constants;
 
 public class OtherReceiver : IListener
 {
@@ -11,8 +12,8 @@ public class OtherReceiver : IListener
     {
         List<string> array = new List<string>
         {
-            Contants.Other.ChangeData,
-            Contants.Other.ChangeDataSecond
+            Other.ChangeData,
+            Other.ChangeDataSecond
         };
         return array.ToArray();
     }
@@ -21,10 +22,10 @@ public class OtherReceiver : IListener
     {
         switch (message.Name)
         {
-            case Contants.Other.ChangeData:
+            case Other.ChangeData:
                 ChangeData(message);
                 break;
-            case Contants.Other.ChangeDataSecond:
+            case Other.ChangeDataSecond:
                 ChangeDataSecond();
                 break;
         }
