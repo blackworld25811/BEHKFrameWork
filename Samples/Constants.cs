@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Contants
+public class Constants
 {
     public struct Sample
     {
