@@ -56,7 +56,8 @@ namespace BEHKFrameWork.Binding
                 // only ui comoponet binding
                 if (bindingAttribute.Key != null)
                 {
-                    keyAttributeDictionary.TryAdd(bindingAttribute.Key, bindingAttribute);
+                    // class name + attribute name,keep id only
+                    keyAttributeDictionary.TryAdd(type.Name + bindingAttribute.Key, bindingAttribute);
                 }
                 BindingUpdate.Instance.AddBindingAttributes(bindingAttribute);
             }
