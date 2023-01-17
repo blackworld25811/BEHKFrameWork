@@ -68,7 +68,7 @@ namespace BEHKFrameWork.Message
 
             if (listenerName.Equals(className) == false)
             {
-               throw new Exception("listenerName must be same to call class");
+                throw new Exception("listenerName must be same to call class");
             }
             if (dataDictionary.TryGetValue(listenerName, out var data))
             {
@@ -93,9 +93,19 @@ namespace BEHKFrameWork.Message
         /// <param name="name"></param>
         /// <param name="type"></param>
         /// <param name="body"></param>
-        public void SendMessage(string name, string type = null, object body = null)
+        public void SendMessage(string name, string type, object body)
         {
             Message message = new Message(name, type, body);
+
+            if (observerDictionary.TryGetValue(name, out var observer))
+            {
+                observer.Execute(message);
+            }
+        }
+
+        public void SendMessage(string name, string type)
+        {
+            Message message = new Message(name, type, null);
 
             if (observerDictionary.TryGetValue(name, out var observer))
             {
@@ -106,6 +116,16 @@ namespace BEHKFrameWork.Message
         public void SendMessage(string name, object body)
         {
             Message message = new Message(name, null, body);
+
+            if (observerDictionary.TryGetValue(name, out var observer))
+            {
+                observer.Execute(message);
+            }
+        }
+
+        public void SendMessage(string name)
+        {
+            Message message = new Message(name, null, null);
 
             if (observerDictionary.TryGetValue(name, out var observer))
             {
