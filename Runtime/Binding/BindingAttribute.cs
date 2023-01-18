@@ -110,8 +110,6 @@ namespace BEHKFrameWork.Binding
             {
                 BindingMessageList = new List<BindingMessage>();
             }
-            // class name + attribute name,keep id only
-
             Key = key;
         }
     }

@@ -52,6 +52,7 @@ namespace BEHKFrameWork.Editor
         {
             string content;
             StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("using UnityEngine;\n");
             stringBuilder.Append("using BEHKFrameWork.Message;\n");
             stringBuilder.Append("using System.Collections.Generic;\n");
             stringBuilder.Append("using static Constants;\n");
