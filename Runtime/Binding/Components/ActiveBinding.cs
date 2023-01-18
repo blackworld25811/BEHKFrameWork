@@ -2,13 +2,12 @@ using UnityEngine;
 
 namespace BEHKFrameWork.Binding.Component
 {
-    public class ActiveBinding : MonoBehaviour
+    public class ActiveBinding : ComponentsBinding
     {
-        public string Key;
 
         private void Start()
         {
-            BindingAttribute bindingAttribute = BindingListenerData.Instance.GetBindingAttribute(Key);
+            BindingAttribute bindingAttribute = BindingListenerData.Instance.GetBindingAttribute(GetKey());
             if (bindingAttribute == null) return;
 
             BindingComponentValue<object> bindingComponentValue = new BindingComponentValue<object>(gameObject)

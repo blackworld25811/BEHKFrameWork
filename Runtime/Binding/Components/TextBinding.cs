@@ -3,15 +3,14 @@ using UnityEngine.UI;
 
 namespace BEHKFrameWork.Binding.Component
 {
-    public class TextBinding : MonoBehaviour
+    public class TextBinding : ComponentsBinding
     {
-        public string Key;
-
+       
         private Text Text;
 
         private void Start()
         {
-            BindingAttribute bindingAttribute = BindingListenerData.Instance.GetBindingAttribute(Key);
+            BindingAttribute bindingAttribute = BindingListenerData.Instance.GetBindingAttribute(GetKey());
             if (bindingAttribute == null) return;
 
             Text = GetComponent<Text>();
@@ -24,7 +23,7 @@ namespace BEHKFrameWork.Binding.Component
 
         private void ChangeText(object text)
         {
-            Text.text =  text as string;
+            Text.text = text as string;
         }
     }
 }

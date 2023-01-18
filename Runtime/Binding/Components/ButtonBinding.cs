@@ -4,9 +4,8 @@ using UnityEngine.UI;
 
 namespace BEHKFrameWork.Binding.Component
 {
-    public class ButtonBinding : MonoBehaviour
+    public class ButtonBinding :ComponentsBinding
     {
-        public string Key;
 
         private Button Button;
 
@@ -14,7 +13,7 @@ namespace BEHKFrameWork.Binding.Component
 
         void Start()
         {
-            BindingAttribute bindingAttribute = BindingListenerData.Instance.GetBindingAttribute(Key);
+            BindingAttribute bindingAttribute = BindingListenerData.Instance.GetBindingAttribute(GetKey());
             if (bindingAttribute == null) return;
 
             Button = GetComponent<Button>();
