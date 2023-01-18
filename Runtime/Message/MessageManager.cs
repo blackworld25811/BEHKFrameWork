@@ -103,16 +103,6 @@ namespace BEHKFrameWork.Message
             }
         }
 
-        public void SendMessage(string name, string type)
-        {
-            Message message = new Message(name, type, null);
-
-            if (observerDictionary.TryGetValue(name, out var observer))
-            {
-                observer.Execute(message);
-            }
-        }
-
         public void SendMessage(string name, object body)
         {
             Message message = new Message(name, null, body);
