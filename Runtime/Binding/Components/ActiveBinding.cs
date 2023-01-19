@@ -4,7 +4,6 @@ namespace BEHKFrameWork.Binding.Component
 {
     public class ActiveBinding : ComponentsBinding
     {
-
         private void Start()
         {
             BindingAttribute bindingAttribute = BindingListenerData.Instance.GetBindingAttribute(GetKey());

@@ -1,18 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace BEHKFrameWork.Binding.Component
 {
-    public class TextBinding : ComponentsBinding
+    public class TextProBinding : ComponentsBinding
     {
-        private Text Text;
+        private TextMeshProUGUI Text;
 
         private void Start()
         {
             BindingAttribute bindingAttribute = BindingListenerData.Instance.GetBindingAttribute(GetKey());
             if (bindingAttribute == null) return;
 
-            Text = GetComponent<Text>();
+            Text = GetComponent<TextMeshProUGUI>();
             BindingComponentValue<object> bindingComponentValue = new BindingComponentValue<object>(Text.text)
             {
                 OnValueChanged = ChangeText

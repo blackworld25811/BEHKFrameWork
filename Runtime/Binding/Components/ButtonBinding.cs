@@ -6,7 +6,6 @@ namespace BEHKFrameWork.Binding.Component
 {
     public class ButtonBinding :ComponentsBinding
     {
-
         private Button Button;
 
         private Action Action;
