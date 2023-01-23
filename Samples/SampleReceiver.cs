@@ -53,6 +53,7 @@ public class SampleReceiver : IListener
         data.Name = "456";
         data.Id = "change";
         data.Active = true;
+        data.Active_text = true;
     }
 
     private void Close()

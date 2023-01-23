@@ -11,6 +11,8 @@ public class SampleData : IData
 
     private bool active;
 
+    private bool active_text;
+
     private Action button;
 
     [Binding("Text_0")]
@@ -33,6 +35,10 @@ public class SampleData : IData
         set => button = value;
     }
 
+    [Binding("Text_0_active")]
+    public bool Active_text { get => active_text; set => active_text = value; }
+
     [Binding("Image_active")]
     public bool Active { get => active; set => active = value; }
+
 }
