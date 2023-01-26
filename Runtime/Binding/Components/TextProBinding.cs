@@ -7,14 +7,14 @@ namespace BEHKFrameWork.Binding.Component
 {
     public class TextProBinding : ComponentsBinding
     {
-        private TextMeshProUGUI Text;
+        private TMP_Text Text;
 
         private void Start()
         {
             BindingAttribute bindingAttribute = BindingListenerData.Instance.GetBindingAttribute(GetKey());
             if (bindingAttribute == null) return;
 
-            Text = GetComponent<TextMeshProUGUI>();
+            Text = GetComponent<TMP_Text>();
             BindingComponentValue<object> bindingComponentValue = new BindingComponentValue<object>(Text.text)
             {
                 OnValueChanged = ChangeText

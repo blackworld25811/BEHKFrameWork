@@ -45,6 +45,7 @@ public class SampleReceiver : IListener
         MessageManager.Instance.BindingMessage(nameof(data.Name), new Message(Other.ChangeData, null, data));
         MessageManager.Instance.BindingMessage(nameof(data.Id), new Message(Other.ChangeData, null, data));
         data.Button = Button_0;
+        data.Toggle = Toggle;
         data.Active = false;
     }
 
@@ -64,6 +65,11 @@ public class SampleReceiver : IListener
     private void Button_0()
     {
         Debug.Log("Button_0");
+    }
+
+    private void Toggle(bool isOn)
+    {
+        Debug.Log(isOn);
     }
 
     #endregion

@@ -15,6 +15,8 @@ public class SampleData : IData
 
     private Action button;
 
+    private Action<bool> toggle;
+
     [Binding("Text_0")]
     public string Name
     {
@@ -28,6 +30,12 @@ public class SampleData : IData
         set => id = value;
     }
 
+    [Binding("Text_0_active")]
+    public bool Active_text { get => active_text; set => active_text = value; }
+
+    [Binding("Image_active")]
+    public bool Active { get => active; set => active = value; }
+
     [Binding("Button_0")]
     public Action Button
     {
@@ -35,10 +43,6 @@ public class SampleData : IData
         set => button = value;
     }
 
-    [Binding("Text_0_active")]
-    public bool Active_text { get => active_text; set => active_text = value; }
-
-    [Binding("Image_active")]
-    public bool Active { get => active; set => active = value; }
-
+    [Binding("Toggle")]
+    public Action<bool> Toggle { get => toggle; set => toggle = value; }
 }
