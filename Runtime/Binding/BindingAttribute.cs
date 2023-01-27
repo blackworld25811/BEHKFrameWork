@@ -28,8 +28,7 @@ namespace BEHKFrameWork.Binding
         /// </summary>
         public string Key
         {
-            get => key;
-            set => key = value;
+            get => key; set => key = value;
         }
 
         /// <summary>
@@ -37,8 +36,7 @@ namespace BEHKFrameWork.Binding
         /// </summary>
         public object Object
         {
-            get => @object;
-            set => @object = value;
+            get => @object; set => @object = value;
         }
 
         /// <summary>
@@ -46,8 +44,7 @@ namespace BEHKFrameWork.Binding
         /// </summary>
         public PropertyInfo PropertyInfo
         {
-            get => propertyInfo;
-            set => propertyInfo = value;
+            get => propertyInfo; set => propertyInfo = value;
         }
 
         /// <summary>
@@ -55,8 +52,7 @@ namespace BEHKFrameWork.Binding
         /// </summary>
         public FieldInfo FieldInfo
         {
-            get => fieldInfo;
-            set => fieldInfo = value;
+            get => fieldInfo; set => fieldInfo = value;
         }
 
         /// <summary>
@@ -73,8 +69,7 @@ namespace BEHKFrameWork.Binding
         /// </summary>
         public object OldFieldValue
         {
-            get => oldFieldValue;
-            set => oldFieldValue = value;
+            get => oldFieldValue; set => oldFieldValue = value;
         }
 
         /// <summary>
@@ -82,8 +77,7 @@ namespace BEHKFrameWork.Binding
         /// </summary>
         internal List<BindingComponentValue<object>> BindingComponentValueList
         {
-            get => bindingComponentValueList;
-            set => bindingComponentValueList = value;
+            get => bindingComponentValueList; set => bindingComponentValueList = value;
         }
 
         /// <summary>
@@ -91,8 +85,7 @@ namespace BEHKFrameWork.Binding
         /// </summary>
         internal List<BindingMessage> BindingMessageList
         {
-            get => bindingMessageList;
-            set => bindingMessageList = value;
+            get => bindingMessageList; set => bindingMessageList = value;
         }
 
         /// <summary>
@@ -110,6 +103,7 @@ namespace BEHKFrameWork.Binding
             {
                 BindingMessageList = new List<BindingMessage>();
             }
+
             Key = key;
         }
     }

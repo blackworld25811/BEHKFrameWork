@@ -4,7 +4,6 @@ namespace BEHKFrameWork.Binding
 {
     internal class BindingMessage
     {
-
         private Action<Message.Message> onMessage;
 
         private Message.Message message;

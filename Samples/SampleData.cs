@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class SampleData : IData
 {
-    private string name;
+    private string text_0;
+
+    private bool active_text_0;
 
     private string id;
 
     private bool active;
-
-    private bool active_text;
 
     private Action button;
 
@@ -20,20 +20,18 @@ public class SampleData : IData
     private Action<string> inputField;
 
     [Binding("Text_0")]
-    public string Name
+    public string Text_0
     {
-        get => name;
-        set => name = value;
-    }
-
-    public string Id
-    {
-        get => id;
-        set => id = value;
+        get => text_0; set => text_0 = value;
     }
 
     [Binding("Text_0_active")]
-    public bool Active_text { get => active_text; set => active_text = value; }
+    public bool Active_text_0 { get => active_text_0; set => active_text_0 = value; }
+
+    public string Id
+    {
+        get => id; set => id = value;
+    }
 
     [Binding("Image_active")]
     public bool Active { get => active; set => active = value; }

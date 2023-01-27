@@ -29,8 +29,7 @@ namespace BEHKFrameWork.Binding
         /// </summary>
         public Action<T> OnValueChanged
         {
-            get => onValueChanged;
-            set => onValueChanged = value;
+            get => onValueChanged; set => onValueChanged = value;
         }
 
         public BindingComponentValue(T t)
