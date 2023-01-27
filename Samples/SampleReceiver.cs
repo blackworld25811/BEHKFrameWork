@@ -47,6 +47,7 @@ public class SampleReceiver : IListener
         data.Button = Button_0;
         data.Toggle = Toggle;
         data.Active = false;
+        data.InputField = TMP_InputField;
     }
 
     private void Open()
@@ -70,6 +71,11 @@ public class SampleReceiver : IListener
     private void Toggle(bool isOn)
     {
         Debug.Log(isOn);
+    }
+
+    private void TMP_InputField(string input)
+    {
+        Debug.Log(input);
     }
 
     #endregion

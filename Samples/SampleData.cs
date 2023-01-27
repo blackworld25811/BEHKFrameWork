@@ -17,6 +17,8 @@ public class SampleData : IData
 
     private Action<bool> toggle;
 
+    private Action<string> inputField;
+
     [Binding("Text_0")]
     public string Name
     {
@@ -39,10 +41,12 @@ public class SampleData : IData
     [Binding("Button_0")]
     public Action Button
     {
-        get => button;
-        set => button = value;
+        get => button; set => button = value;
     }
 
     [Binding("Toggle")]
     public Action<bool> Toggle { get => toggle; set => toggle = value; }
+
+    [Binding("InputField (TMP)")]
+    public Action<string> InputField { get => inputField; set => inputField = value; }
 }

@@ -5,7 +5,7 @@ using TMPro;
 
 namespace BEHKFrameWork.Binding.Component
 {
-    public class TextProBinding : ComponentsBinding
+    public class TMP_TextBinding : ComponentsBinding
     {
         private TMP_Text Text;
 
