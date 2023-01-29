@@ -1,3 +1,16 @@
 {
-	"name": "BEHKFrameWork.Editor"
+    "name": "BEHKFrameWork.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:c8bd1afb234e94df18b9d0d90e273180"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

@@ -3,34 +3,40 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Reflection;
+using System.Text;
+using System.Text.RegularExpressions;
 using UnityEngine;
-//using ZXing;
-//using ZXing.QrCode;
-//using ExcelDataReader;
 
 namespace BEHKFrameWork.Utility
 {
     public class Utility
     {
-        //public static Texture2D CreatQRCode(string content, int width, int height)
-        //{
-        //    Texture2D texture2D = new Texture2D(width, height);
-        //    QrCodeEncodingOptions qrCodeEncodingOptions = new QrCodeEncodingOptions();
-        //    qrCodeEncodingOptions.CharacterSet = "UTF-8";
-        //    qrCodeEncodingOptions.Width = width;
-        //    qrCodeEncodingOptions.Height = height;
-        //    qrCodeEncodingOptions.Margin = 2;
+        public static void WriteFile(string fullPath, string content)
+        {
+            if (File.Exists(fullPath) == false)
+            {
+                FileStream file = new FileStream(fullPath, FileMode.CreateNew);
+                StreamWriter streamWriter = new StreamWriter(file, Encoding.UTF8);
+                streamWriter.Write(content);
+                streamWriter.Flush();
+                streamWriter.Close();
+                file.Close();
+            }
+            else
+            {
+                FileStream file = new FileStream(fullPath, FileMode.Open);
+                StreamWriter streamWriter = new StreamWriter(file, Encoding.UTF8);
+                streamWriter.Write(content);
+                streamWriter.Flush();
+                streamWriter.Close();
+                file.Close();
+            }
+        }
 
-        //    BarcodeWriter barcodeWriter = new BarcodeWriter();
-        //    barcodeWriter.Format = BarcodeFormat.QR_CODE;
-        //    barcodeWriter.Options = qrCodeEncodingOptions;
-
-        //    var color32 = barcodeWriter.Write(content);
-        //    texture2D.SetPixels32(color32);
-        //    texture2D.Apply();
-
-        //    return texture2D;
-        //}
+        public static string RemoveStringBlank(string content)
+        {
+            return Regex.Replace(content, @"\s", "");
+        }
 
         public static void ChangeAnimationClip(Animator animator, AnimationClip animationClip, string clipName)
         {
@@ -78,31 +84,6 @@ namespace BEHKFrameWork.Utility
             string secondString = second < 10 ? "0" + second : "" + second;
             string time = hourString + ":" + minuteString + ":" + secondString;
             return time;
-        }
-
-        //public static DataSet ReadExcel(string excelPath)
-        //{
-        //    FileStream fileStream = File.Open(excelPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-        //    IExcelDataReader excelDataReader = ExcelReaderFactory.CreateOpenXmlReader(fileStream);
-        //    DataSet dataset = excelDataReader.AsDataSet();
-        //    return dataset;
-        //}
-
-        public static List<string[]> ReadExcelSheet(DataSet dataSet, string sheetName)
-        {
-            List<string[]> result = new List<string[]>();
-            DataRowCollection dataRow = dataSet.Tables[sheetName].Rows;
-            for (int i = 1; i < dataRow.Count; i++)
-            {
-                DataRow datarow = dataRow[i];
-                string[] temp = new string[datarow.ItemArray.Length];
-                for (int j = 0; j < datarow.ItemArray.Length; j++)
-                {
-                    temp[j] = datarow.ItemArray[j].ToString();
-                }
-                result.Add(temp);
-            }
-            return result;
         }
 
         public static void ClearAllChild(Transform father, bool isImmediate)

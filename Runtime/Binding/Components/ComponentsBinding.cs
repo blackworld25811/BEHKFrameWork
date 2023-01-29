@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using BEHKFrameWork.Utility;
 
 public class ComponentsBinding : MonoBehaviour
 {
@@ -10,8 +11,7 @@ public class ComponentsBinding : MonoBehaviour
 
     public string GetKey()
     {
-        // remove all of blank
-        Key = Regex.Replace(Key, @"\s", "");
+        Key =  Utility.RemoveStringBlank(Key);
         return Key.Equals("") ? name : Key;
     }
 }

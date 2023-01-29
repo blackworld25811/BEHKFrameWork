@@ -5,9 +5,9 @@ using UnityEditor;
 
 namespace BEHKFrameWork.Editor
 {
-    public class AutoCreateCode
+    public class CreateReceiverCode
     {
-        [MenuItem("Assets/BEHKFrameWork/AutoCreateCode")]
+        [MenuItem("Assets/BEHKFrameWork/CreateReceiverCode")]
         public static void CreateCode()
         {
             // get select directory name
@@ -17,35 +17,12 @@ namespace BEHKFrameWork.Editor
             string receiverClassName = "/" + name + "Receiver.cs";
             string dataClassName = "/" + name + "Data.cs";
             // create new class files
-            WriteOneCode(path + receiverClassName, ReceiverContent(name));
-            WriteOneCode(path + dataClassName, DataContent(name));
+            Utility.Utility.WriteFile(path + receiverClassName, ReceiverContent(name));
+            Utility.Utility.WriteFile(path + dataClassName, DataContent(name));
             // Add some content to already script
-            //WriteOneCode("Assets/Scripts/Main", AddMain(name));
-            //WriteOneCode("Assets/Scripts/Contants", AddContants(name));
+            //Utility.Utility.WriteFile("Assets/Scripts/Main", AddMain(name));
+            //Utility.Utility.WriteFile("Assets/Scripts/Contants", AddContants(name));
             AssetDatabase.Refresh();
-        }
-
-        private static void WriteOneCode(string fullPath, string content)
-        {
-            if (File.Exists(fullPath) == false)
-            {
-                FileStream file = new FileStream(fullPath, FileMode.CreateNew);
-                StreamWriter streamWriter = new StreamWriter(file, Encoding.UTF8);
-                streamWriter.Write(content);
-                streamWriter.Flush();
-                streamWriter.Close();
-                file.Close();
-            }
-            else
-            {
-               /*FileStream file = new FileStream(fullPath, FileMode.Open);
-                 StreamWriter streamWriter = new StreamWriter(file, Encoding.UTF8);
-                 streamWriter.Write(content);
-                 streamWriter.Flush();
-                 streamWriter.Close();
-                 file.Close();
-               */
-            }
         }
 
         private static string ReceiverContent(string name)
