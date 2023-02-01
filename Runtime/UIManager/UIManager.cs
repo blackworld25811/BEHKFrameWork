@@ -9,6 +9,7 @@ namespace BEHKFrameWork.UIManager
 {
     public class UIManager : Singleton<UIManager>
     {
+        // use GetInstanceID,keep uniqueness
         private Dictionary<string, GameObject> dictionary;
 
         public UIManager()
@@ -36,7 +37,7 @@ namespace BEHKFrameWork.UIManager
 
         private void GetOneCanvasUIGameObject(Transform transform)
         {
-            dictionary.Add(transform.name, transform.gameObject);
+            dictionary.Add(transform.gameObject.GetInstanceID().ToString(), transform.gameObject);
             for (int i = 0; i < transform.childCount; i++)
             {
                 Transform child = transform.GetChild(i);
@@ -53,7 +54,7 @@ namespace BEHKFrameWork.UIManager
                 if (one.Name.Equals("GameObject"))
                 {
                     UIAttribute attribute = one.GetCustomAttribute<UIAttribute>();
-                    GameObject gameObject = dictionary[attribute.Name];
+                    GameObject gameObject = dictionary[attribute.InstanceID];
                     one.SetValue(instance, gameObject);
                 }
                 else

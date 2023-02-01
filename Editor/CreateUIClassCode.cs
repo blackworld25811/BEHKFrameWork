@@ -34,7 +34,7 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("public class " + FixName(self.name) + " : Singleton<Canvas>\n");
             stringBuilder.Append("{\n");
             stringBuilder.Append("\n");
-            stringBuilder.Append("   [UI(" + "\"" + self.name + "\"" + ")]\n");
+            stringBuilder.Append("   [UI(" + "\"" + self.gameObject.GetInstanceID() + "\"" + ")]\n");
             stringBuilder.Append("   public GameObject GameObject;\n");
             stringBuilder.Append("\n");
             for (int i = 0; i < self.childCount; i++)
@@ -60,7 +60,7 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("   public class Sub_" + FixName(self.name) + "\n");
             stringBuilder.Append("   {\n");
             stringBuilder.Append("\n");
-            stringBuilder.Append("      [UI(" + "\"" + self.name + "\"" + ")]\n");
+            stringBuilder.Append("      [UI(" + "\"" + self.gameObject.GetInstanceID() + "\"" + ")]\n");
             stringBuilder.Append("      public GameObject GameObject;\n");
             if (self.childCount > 0)
             {

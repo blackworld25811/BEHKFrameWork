@@ -8,16 +8,16 @@ namespace BEHKFrameWork.UIManager
     [AttributeUsage(AttributeTargets.Field)]
     public class UIAttribute : Attribute
     {
-        private string name;
+        private string instanceID;
 
         /// <summary>
-        /// the GameObject's UI full name
+        /// the GameObject's GetInstanceID
         /// </summary>
-        public string Name { get => name; set => name = value; }
+        public string InstanceID { get => instanceID; set => instanceID = value; }
 
-        public UIAttribute(string name)
+        public UIAttribute(string instanceID)
         {
-            Name = name;
+            InstanceID = instanceID;
         }
     }
 }
