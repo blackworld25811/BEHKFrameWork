@@ -16,12 +16,11 @@ namespace BEHKFrameWork.Editor
             // iterate over all of the Canvas,one Canvas is a UI tree
             Canvas[] canvas = Resources.FindObjectsOfTypeAll<Canvas>();
 
-            for (int i = 0; i < canvas.Length; i++)
+            foreach (var one in canvas)
             {
-                string content = Content(canvas[i].transform);
-
-                //Utility.Utility.WriteFile("Assets/Scripts/" + canvas[i].name, content);
-                Utility.Utility.WriteFile("Assets/" + canvas[i].name + ".cs", content);
+                string content = Content(one.transform);
+                //Utility.Utility.WriteFile("Assets/Scripts/" + one.name, content);
+                Utility.Utility.WriteFile("Assets/" + one.name + ".cs", content);
             }
         }
 
@@ -30,15 +29,19 @@ namespace BEHKFrameWork.Editor
             string content;
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("using UnityEngine;\n");
+            stringBuilder.Append("using BEHKFrameWork.Utility;\n");
+            stringBuilder.Append("using BEHKFrameWork.UIManager;\n");
             stringBuilder.Append("\n");
-            stringBuilder.Append("public class " + FixName(self.name) + "\n");
+            stringBuilder.Append("public class " + FixName(self.name) + " : Singleton<Canvas>\n");
             stringBuilder.Append("{\n");
+            stringBuilder.Append("\n");
+            stringBuilder.Append("   [UI(" + "\"" + self.name + "\"" + ")]\n");
             stringBuilder.Append("   public GameObject GameObject;\n");
             stringBuilder.Append("\n");
             for (int i = 0; i < self.childCount; i++)
             {
                 string childName = FixName(self.GetChild(i).name);
-                stringBuilder.Append("   public Sub_" + childName + " " + childName + " = new Sub_" + childName + "();\n");
+                stringBuilder.Append("   public Sub_" + childName + " " + childName + ";\n");
                 stringBuilder.Append("\n");
 
                 SubClassContent(self.GetChild(i), stringBuilder);
@@ -57,6 +60,8 @@ namespace BEHKFrameWork.Editor
         {
             stringBuilder.Append("   public class Sub_" + FixName(self.name) + "\n");
             stringBuilder.Append("   {\n");
+            stringBuilder.Append("\n");
+            stringBuilder.Append("      [UI(" + "\"" + self.name + "\"" + ")]\n");
             stringBuilder.Append("      public GameObject GameObject;\n");
             if (self.childCount > 0)
             {
@@ -65,7 +70,7 @@ namespace BEHKFrameWork.Editor
             for (int i = 0; i < self.childCount; i++)
             {
                 string childName = FixName(self.GetChild(i).name);
-                stringBuilder.Append("      public Sub_" + childName + " " + childName + " = new Sub_" + childName + "();\n");
+                stringBuilder.Append("      public Sub_" + childName + " " + childName + ";\n");
                 stringBuilder.Append("\n");
 
                 SubClassContent(self.GetChild(i), stringBuilder);
