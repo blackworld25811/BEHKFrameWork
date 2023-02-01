@@ -19,7 +19,6 @@ namespace BEHKFrameWork.Editor
             foreach (var one in canvas)
             {
                 string content = Content(one.transform);
-                //Utility.Utility.WriteFile("Assets/Scripts/" + one.name, content);
                 Utility.Utility.WriteFile("Assets/" + one.name + ".cs", content);
             }
         }
