@@ -5,11 +5,29 @@ using System.Net.Http;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace BEHKFrameWork.Editor
 {
     public class CreateUIClassCode
     {
+        // create code if save scene,keep Canvas code is right
+        public class SaveScene : AssetModificationProcessor
+        {
+            static public void OnWillSaveAssets(string[] names)
+            {
+                foreach (string name in names)
+                {
+                    if (name.EndsWith(".unity"))
+                    {
+                        CreateCode();
+                        //Scene scene = SceneManager.GetSceneByPath(name);
+                        //Debug.Log("雨松MOMO提醒您保存的场景名称是 ：" + scene.name);
+                    }
+                }
+            }
+        }
+
         [MenuItem("GameObject/BEHKFrameWork/CreateUIClassCode")]
         public static void CreateCode()
         {
@@ -33,7 +51,6 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("\n");
             stringBuilder.Append("public class " + FixName(self.name) + " : Singleton<Canvas>\n");
             stringBuilder.Append("{\n");
-            stringBuilder.Append("\n");
             stringBuilder.Append("   [UI(" + "\"" + self.gameObject.GetInstanceID() + "\"" + ")]\n");
             stringBuilder.Append("   public GameObject GameObject;\n");
             stringBuilder.Append("\n");
@@ -59,7 +76,6 @@ namespace BEHKFrameWork.Editor
         {
             stringBuilder.Append("   public class Sub_" + FixName(self.name) + "\n");
             stringBuilder.Append("   {\n");
-            stringBuilder.Append("\n");
             stringBuilder.Append("      [UI(" + "\"" + self.gameObject.GetInstanceID() + "\"" + ")]\n");
             stringBuilder.Append("      public GameObject GameObject;\n");
             if (self.childCount > 0)

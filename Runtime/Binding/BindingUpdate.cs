@@ -42,6 +42,11 @@ namespace BEHKFrameWork.Binding
             }
         }
 
+        private void OnDestroy()
+        {
+            CancelInvoke();
+        }
+
         /// <summary>
         /// initialize
         /// </summary>
@@ -57,7 +62,7 @@ namespace BEHKFrameWork.Binding
                 repeatRate = 1f / Application.targetFrameRate;
             }
             bindingAttributes = new List<BindingAttribute>();
-            InvokeRepeating("UpdateBindingAttributes", 0, repeatRate);
+            InvokeRepeating(nameof(UpdateBindingAttributes), 0, repeatRate);
         }
 
         /// <summary>
