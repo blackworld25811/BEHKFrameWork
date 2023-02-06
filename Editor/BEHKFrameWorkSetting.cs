@@ -48,6 +48,11 @@ namespace BEHKFrameWork.Editor
             SaveData(nameof(UICodePath), UICodePath);
         }
 
+        public static string GetValue(string name)
+        {
+            return EditorUserSettings.GetConfigValue(name);
+        }
+
         private static string LoadData(string name, string value)
         {
             string saveFrame = EditorUserSettings.GetConfigValue(name);

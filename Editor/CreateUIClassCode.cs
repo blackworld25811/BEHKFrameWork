@@ -44,7 +44,7 @@ namespace BEHKFrameWork.Editor
             foreach (var one in canvas)
             {
                 string content = Content(one.transform);
-                Utility.Utility.WriteFile(BEHKFrameWorkSetting.UICodePath + one.name + ".cs", content);
+                Utility.Utility.WriteFile(BEHKFrameWorkSetting.GetValue(nameof(BEHKFrameWorkSetting.UICodePath)) + one.name + ".cs", content);
             }
         }
 

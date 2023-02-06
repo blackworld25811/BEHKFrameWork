@@ -52,7 +52,7 @@ namespace BEHKFrameWork.Binding
         /// </summary>
         private void Init()
         {
-            int frame = int.Parse(BEHKFrameWorkSetting.Frame);
+            int frame = int.Parse(BEHKFrameWorkSetting.GetValue(nameof(BEHKFrameWorkSetting.Frame)));
             if (frame == -1)
             {
                 // the max frame time
