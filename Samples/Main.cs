@@ -19,7 +19,6 @@ public class Main : MonoBehaviour
         Invoke("Delay_1", 2);
 
         UIManager.Instance.Initialize(Canvas.Instance);
-        Debug.Log("");
     }
 
     public void Delay_0()

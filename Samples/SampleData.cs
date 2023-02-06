@@ -19,6 +19,12 @@ public class SampleData : IData
 
     private Action<string> inputField;
 
+    private Vector3 localPosition;
+
+    private Vector3 localRotation;
+
+    private Vector3 localScale;
+
     [Binding("Text_0")]
     public string Text_0
     {
@@ -47,4 +53,13 @@ public class SampleData : IData
 
     [Binding("InputField (TMP)")]
     public Action<string> InputField { get => inputField; set => inputField = value; }
+
+    [Binding("LocalPositionBinding_Image")]
+    public Vector3 LocalPosition { get => localPosition; set => localPosition = value; }
+
+    [Binding("LocalRotationBinding_Image")]
+    public Vector3 LocalRotation { get => localRotation; set => localRotation = value; }
+
+    [Binding("LocalScaleBinding_Image")]
+    public Vector3 LocalScale { get => localScale; set => localScale = value; }
 }

@@ -1,7 +1,7 @@
 using BEHKFrameWork.Message;
 using System.Collections.Generic;
 using UnityEngine;
-using static Constants;  
+using static Constants;
 
 public class SampleReceiver : IListener
 {
@@ -48,6 +48,9 @@ public class SampleReceiver : IListener
         data.Toggle = Toggle;
         data.Active = false;
         data.InputField = TMP_InputField;
+        data.LocalPosition = new Vector3(5, 5, 5);
+        data.LocalRotation = new Vector3(0, 0, 20);
+        data.LocalScale = new Vector3(2, 2, 2);
     }
 
     private void Open()
@@ -55,7 +58,7 @@ public class SampleReceiver : IListener
         data.Text_0 = "456";
         data.Id = "change";
         data.Active = true;
-        data.Active_text_0 = true; 
+        data.Active_text_0 = true;
     }
 
     private void Close()
@@ -77,6 +80,8 @@ public class SampleReceiver : IListener
     {
         Debug.Log(input);
     }
+
+
 
     #endregion
 }
