@@ -8,7 +8,7 @@ namespace BEHKFrameWork.Editor
 {
     public class BEHKFrameWorkSetting : EditorWindow
     {
-        public static int Frame = -1;
+        public static string Frame = "-1";
 
         public static string UICodePath = "Assets/";
 
@@ -17,8 +17,13 @@ namespace BEHKFrameWork.Editor
         private static GUIContent GUIContent_UICodePath;
 
         [MenuItem("BEHKFrameWork/Setting")]
-        public static void OpenWindwo()
+        public static void Open()
         {
+            // load save
+            Frame = LoadData(nameof(Frame), Frame);
+            UICodePath = LoadData(nameof(UICodePath), UICodePath);
+
+            UICodePath = EditorUserSettings.GetConfigValue("UICodePath");
             GUIContent_Frame = new GUIContent();
             GUIContent_Frame.text = Frame.ToString();
             GUIContent_UICodePath = new GUIContent();
@@ -32,8 +37,37 @@ namespace BEHKFrameWork.Editor
                 EditorGUILayout.TextField("Frame", GUIContent_Frame.text, GUILayout.MinWidth(100));
             GUIContent_UICodePath.text =
                 EditorGUILayout.TextField("UICodePath", GUIContent_UICodePath.text, GUILayout.MinWidth(100));
-            Frame = int.Parse(GUIContent_Frame.text);
+            Frame = GUIContent_Frame.text;
             UICodePath = GUIContent_UICodePath.text;
+        }
+
+        private void OnDestroy()
+        {
+            // save setting
+            SaveData(nameof(Frame), Frame);
+            SaveData(nameof(UICodePath), UICodePath);
+        }
+
+        private static string LoadData(string name, string value)
+        {
+            string saveFrame = EditorUserSettings.GetConfigValue(name);
+            if (saveFrame == null)
+            {
+                EditorUserSettings.SetConfigValue(name, value);
+                return value;
+            }
+            else
+            {
+                return saveFrame;
+            }
+        }
+
+        private static void SaveData(string name, string value)
+        {
+            if (EditorUserSettings.GetConfigValue(name).Equals(value) == false)
+            {
+                EditorUserSettings.SetConfigValue(name, value);
+            }
         }
     }
 }

@@ -52,15 +52,16 @@ namespace BEHKFrameWork.Binding
         /// </summary>
         private void Init()
         {
-            if (BEHKFrameWorkSetting.Frame == -1)
+            int frame = int.Parse(BEHKFrameWorkSetting.Frame);
+            if (frame == -1)
             {
                 // the max frame time
                 repeatRate = 1f / 120;
             }
             else
             {
-                Application.targetFrameRate = BEHKFrameWorkSetting.Frame;
-                repeatRate = 1f / BEHKFrameWorkSetting.Frame;
+                Application.targetFrameRate = frame;
+                repeatRate = 1f / frame;
             }
             bindingAttributes = new List<BindingAttribute>();
             InvokeRepeating(nameof(UpdateBindingAttributes), 0, repeatRate);
