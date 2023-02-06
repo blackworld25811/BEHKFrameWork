@@ -1,8 +1,8 @@
 {
-    "name": "BEHKFrameWork.Editor",
+    "name": "BEHKfFrameWork.Editor",
     "rootNamespace": "",
     "references": [
-        "GUID:c8bd1afb234e94df18b9d0d90e273180"
+        "GUID:8cc1394a7aac841d88986035fa813536"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

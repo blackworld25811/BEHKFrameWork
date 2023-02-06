@@ -21,10 +21,17 @@ namespace BEHKFrameWork.Editor
                     if (name.EndsWith(".unity"))
                     {
                         CreateCode();
-                        //Scene scene = SceneManager.GetSceneByPath(name);
-                        //Debug.Log("雨松MOMO提醒您保存的场景名称是 ：" + scene.name);
                     }
                 }
+            }
+        }
+
+        [InitializeOnLoad]
+        public class Startup
+        {
+            static Startup()
+            {
+                //CreateCode();                   
             }
         }
 
@@ -37,7 +44,7 @@ namespace BEHKFrameWork.Editor
             foreach (var one in canvas)
             {
                 string content = Content(one.transform);
-                Utility.Utility.WriteFile("Assets/" + one.name + ".cs", content);
+                Utility.Utility.WriteFile(BEHKFrameWorkSetting.UICodePath + one.name + ".cs", content);
             }
         }
 

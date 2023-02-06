@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using BEHKFrameWork.Editor;
 using UnityEngine;
-
 
 namespace BEHKFrameWork.Binding
 {
@@ -52,14 +52,15 @@ namespace BEHKFrameWork.Binding
         /// </summary>
         private void Init()
         {
-            if (Application.targetFrameRate == -1)
+            if (BEHKFrameWorkSetting.Frame == -1)
             {
                 // the max frame time
                 repeatRate = 1f / 120;
             }
             else
             {
-                repeatRate = 1f / Application.targetFrameRate;
+                Application.targetFrameRate = BEHKFrameWorkSetting.Frame;
+                repeatRate = 1f / BEHKFrameWorkSetting.Frame;
             }
             bindingAttributes = new List<BindingAttribute>();
             InvokeRepeating(nameof(UpdateBindingAttributes), 0, repeatRate);

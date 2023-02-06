@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using UnityEditor;
+using BEHKFrameWork.Utility;
 
 namespace BEHKFrameWork.Editor
 {
