@@ -65,7 +65,7 @@ namespace BEHKFrameWork.Message
         public IData GetListenerData(string listenerName)
         {
             string className = Utility.Utility.GetCallClassName();
-
+            
             if (listenerName.Equals(className) == false)
             {
                 throw new Exception("listenerName must be same to call class");
