@@ -24,7 +24,8 @@ namespace BEHKFrameWork.Utility
             }
             else
             {
-                FileStream file = new FileStream(fullPath, FileMode.Open);
+
+                FileStream file = new FileStream(fullPath, FileMode.Create);
                 StreamWriter streamWriter = new StreamWriter(file, Encoding.UTF8);
                 streamWriter.Write(content);
                 streamWriter.Flush();
