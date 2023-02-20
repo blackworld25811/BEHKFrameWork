@@ -12,6 +12,8 @@ namespace BEHKFrameWork.UIManager
         // use GetInstanceID,keep uniqueness
         private Dictionary<string, GameObject> dictionary;
 
+        private System.Random random = new System.Random(25811);
+
         public UIManager()
         {
             dictionary = new Dictionary<string, GameObject>();
@@ -37,7 +39,8 @@ namespace BEHKFrameWork.UIManager
 
         private void GetOneCanvasUIGameObject(Transform transform)
         {
-            dictionary.Add(transform.gameObject.GetInstanceID().ToString(), transform.gameObject);
+            string id = random.Next().ToString();
+            dictionary.Add(id, transform.gameObject);
             for (int i = 0; i < transform.childCount; i++)
             {
                 Transform child = transform.GetChild(i);

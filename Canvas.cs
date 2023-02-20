@@ -4,21 +4,21 @@ using BEHKFrameWork.UIManager;
 
 public class Canvas : Singleton<Canvas>
 {
-   [UI("19336")]
+   [UI("98843960")]
    public GameObject GameObject;
 
    public Sub_Panel_sample Panel_sample;
 
    public class Sub_Panel_sample
    {
-      [UI("19322")]
+      [UI("526700379")]
       public GameObject GameObject;
 
       public Sub_Text_0 Text_0;
 
    public class Sub_Text_0
    {
-      [UI("19290")]
+      [UI("745273261")]
       public GameObject GameObject;
    }
 
@@ -26,7 +26,7 @@ public class Canvas : Singleton<Canvas>
 
    public class Sub_Text_1
    {
-      [UI("19410")]
+      [UI("1575485341")]
       public GameObject GameObject;
    }
 
@@ -34,14 +34,14 @@ public class Canvas : Singleton<Canvas>
 
    public class Sub_Button_Legacy
    {
-      [UI("19374")]
+      [UI("1083324411")]
       public GameObject GameObject;
 
       public Sub_Text_Legacy Text_Legacy;
 
    public class Sub_Text_Legacy
    {
-      [UI("19260")]
+      [UI("1578772164")]
       public GameObject GameObject;
    }
    }
@@ -50,14 +50,14 @@ public class Canvas : Singleton<Canvas>
 
    public class Sub_Button_Legacy1
    {
-      [UI("19434")]
+      [UI("1497759294")]
       public GameObject GameObject;
 
       public Sub_Text_Legacy Text_Legacy;
 
    public class Sub_Text_Legacy
    {
-      [UI("19394")]
+      [UI("898290110")]
       public GameObject GameObject;
    }
    }
@@ -66,7 +66,7 @@ public class Canvas : Singleton<Canvas>
 
    public class Sub_Image
    {
-      [UI("19364")]
+      [UI("492426892")]
       public GameObject GameObject;
    }
 
@@ -74,21 +74,21 @@ public class Canvas : Singleton<Canvas>
 
    public class Sub_Toggle
    {
-      [UI("19386")]
+      [UI("232541773")]
       public GameObject GameObject;
 
       public Sub_Background Background;
 
    public class Sub_Background
    {
-      [UI("19444")]
+      [UI("93550792")]
       public GameObject GameObject;
 
       public Sub_Checkmark Checkmark;
 
    public class Sub_Checkmark
    {
-      [UI("19426")]
+      [UI("1047669724")]
       public GameObject GameObject;
    }
    }
@@ -97,7 +97,7 @@ public class Canvas : Singleton<Canvas>
 
    public class Sub_Label
    {
-      [UI("19402")]
+      [UI("927582222")]
       public GameObject GameObject;
    }
    }
@@ -106,7 +106,7 @@ public class Canvas : Singleton<Canvas>
 
    public class Sub_LocalPositionBinding_Image
    {
-      [UI("19234")]
+      [UI("1671315078")]
       public GameObject GameObject;
    }
 
@@ -114,7 +114,7 @@ public class Canvas : Singleton<Canvas>
 
    public class Sub_LocalRotationBinding_Image
    {
-      [UI("19302")]
+      [UI("2052945891")]
       public GameObject GameObject;
    }
 
@@ -122,7 +122,7 @@ public class Canvas : Singleton<Canvas>
 
    public class Sub_LocalScaleBinding_Image
    {
-      [UI("19268")]
+      [UI("1157968755")]
       public GameObject GameObject;
    }
    }
@@ -131,14 +131,14 @@ public class Canvas : Singleton<Canvas>
 
    public class Sub_Panel_sample_TMP
    {
-      [UI("19252")]
+      [UI("1611320572")]
       public GameObject GameObject;
 
       public Sub_Text_TMP Text_TMP;
 
    public class Sub_Text_TMP
    {
-      [UI("19226")]
+      [UI("1713644015")]
       public GameObject GameObject;
    }
 
@@ -146,21 +146,21 @@ public class Canvas : Singleton<Canvas>
 
    public class Sub_InputField_TMP
    {
-      [UI("19278")]
+      [UI("839501123")]
       public GameObject GameObject;
 
       public Sub_TextArea TextArea;
 
    public class Sub_TextArea
    {
-      [UI("19420")]
+      [UI("987437696")]
       public GameObject GameObject;
 
       public Sub_Placeholder Placeholder;
 
    public class Sub_Placeholder
    {
-      [UI("19312")]
+      [UI("726643953")]
       public GameObject GameObject;
    }
 
@@ -168,7 +168,7 @@ public class Canvas : Singleton<Canvas>
 
    public class Sub_Text
    {
-      [UI("19346")]
+      [UI("501549691")]
       public GameObject GameObject;
    }
    }

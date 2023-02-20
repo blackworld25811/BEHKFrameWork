@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using Codice.CM.Common;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,8 @@ namespace BEHKFrameWork.Editor
 {
     public class CreateUIClassCode
     {
+        private static System.Random random = new System.Random(25811);
+
         // create code if save scene,keep Canvas code is right
         public class SaveScene : AssetModificationProcessor
         {
@@ -51,6 +54,7 @@ namespace BEHKFrameWork.Editor
         private static string Content(Transform self)
         {
             string content;
+            int id = random.Next();
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("using UnityEngine;\n");
             stringBuilder.Append("using BEHKFrameWork.Utility;\n");
@@ -58,7 +62,7 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("\n");
             stringBuilder.Append("public class " + FixName(self.name) + " : Singleton<Canvas>\n");
             stringBuilder.Append("{\n");
-            stringBuilder.Append("   [UI(" + "\"" + self.gameObject.GetInstanceID() + "\"" + ")]\n");
+            stringBuilder.Append("   [UI(" + "\"" + id + "\"" + ")]\n");
             stringBuilder.Append("   public GameObject GameObject;\n");
             stringBuilder.Append("\n");
             for (int i = 0; i < self.childCount; i++)
@@ -81,9 +85,10 @@ namespace BEHKFrameWork.Editor
 
         private static void SubClassContent(Transform self, StringBuilder stringBuilder)
         {
+            int id = random.Next();
             stringBuilder.Append("   public class Sub_" + FixName(self.name) + "\n");
             stringBuilder.Append("   {\n");
-            stringBuilder.Append("      [UI(" + "\"" + self.gameObject.GetInstanceID() + "\"" + ")]\n");
+            stringBuilder.Append("      [UI(" + "\"" + id + "\"" + ")]\n");
             stringBuilder.Append("      public GameObject GameObject;\n");
             if (self.childCount > 0)
             {
