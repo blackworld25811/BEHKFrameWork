@@ -37,12 +37,12 @@ namespace BEHKFrameWork.Binding.Component
         {
             Action = action as Action<bool>;
             Toggle.onValueChanged.RemoveAllListeners();
-            Toggle.onValueChanged.AddListener(OnClick);
+            Toggle.onValueChanged.AddListener(OnValueChanged);
         }
 
-        private void OnClick(bool isOn)
+        private void OnValueChanged(bool isOn)
         {
-            Action(isOn);
+            Action?.Invoke(isOn);
         }
     }
 }

@@ -5,13 +5,11 @@ using System.Linq;
 using System.Reflection;
 using BEHKFrameWork.Utility;
 using UnityEngine;
-using UnityEngine.XR;
 
 namespace BEHKFrameWork.UIManager
 {
     public class UIManager : Singleton<UIManager>
     {
-
         /// <summary>
         /// Initialize the UI class,get GameObject to UI class
         /// </summary>

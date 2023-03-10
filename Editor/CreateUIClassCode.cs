@@ -1,12 +1,10 @@
 # if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Text;
 using Codice.CM.Common;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace BEHKFrameWork.Editor
 {

@@ -109,6 +109,27 @@ public class Canvas : Singleton<Canvas>
    {
       public GameObject GameObject;
    }
+
+      public Sub_Scrollbar Scrollbar;
+
+   public class Sub_Scrollbar
+   {
+      public GameObject GameObject;
+
+      public Sub_SlidingArea SlidingArea;
+
+   public class Sub_SlidingArea
+   {
+      public GameObject GameObject;
+
+      public Sub_Handle Handle;
+
+   public class Sub_Handle
+   {
+      public GameObject GameObject;
+   }
+   }
+   }
    }
 
    public Sub_Panel_sample_TMP Panel_sample_TMP;

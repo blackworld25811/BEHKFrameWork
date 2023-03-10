@@ -4,25 +4,25 @@ using UnityEngine.UI;
 
 namespace BEHKFrameWork.Binding.Component
 {
-    public class ButtonBinding :ComponentsBinding
+    public class ScrollbarBinding : ComponentsBinding
     {
-        private Button Button;
+        private Scrollbar Scrollbar;
 
-        private Action Action;
+        private Action<float> Action;
 
         void Start()
         {
             BindingAttribute bindingAttribute = BindingListenerData.Instance.GetBindingAttribute(GetKey());
             if (bindingAttribute == null) return;
 
-            Button = GetComponent<Button>();
+            Scrollbar = GetComponent<Scrollbar>();
             if (bindingAttribute.PropertyInfo != null)
             {
-                Action = bindingAttribute.PropertyInfo.GetValue(bindingAttribute.Object) as Action;
+                Action = bindingAttribute.PropertyInfo.GetValue(bindingAttribute.Object) as Action<float>;
             }
             if (bindingAttribute.FieldInfo != null)
             {
-                Action = bindingAttribute.FieldInfo.GetValue(bindingAttribute.Object) as Action;
+                Action = bindingAttribute.FieldInfo.GetValue(bindingAttribute.Object) as Action<float>;
             }
             BindingComponentValue<object> bindingComponentValue = new BindingComponentValue<object>(Action)
             {
@@ -31,17 +31,16 @@ namespace BEHKFrameWork.Binding.Component
             bindingAttribute.BindingComponentValueList.Add(bindingComponentValue);
         }
 
-        // add listener again,because action is null in the start
         private void ChangeAddListener(object action)
         {
-            Action = action as Action;
-            Button.onClick.RemoveAllListeners();
-            Button.onClick.AddListener(OnClick);
+            Action = action as Action<float>;
+            Scrollbar.onValueChanged.RemoveAllListeners();
+            Scrollbar.onValueChanged.AddListener(OnValueChanged);
         }
 
-        private void OnClick()
+        private void OnValueChanged(float value)
         {
-            Action?.Invoke();
+            Action?.Invoke(value);
         }
     }
 }

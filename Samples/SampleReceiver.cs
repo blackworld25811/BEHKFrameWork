@@ -51,6 +51,7 @@ public class SampleReceiver : IListener
         data.LocalPosition = new Vector3(5, 5, 5);
         data.LocalRotation = new Vector3(0, 0, 20);
         data.LocalScale = new Vector3(2, 2, 2);
+        data.Scrollbar = Scrollbar;
     }
 
     private void Open()
@@ -74,6 +75,11 @@ public class SampleReceiver : IListener
     private void Toggle(bool isOn)
     {
         Debug.Log(isOn);
+    }
+
+    private void Scrollbar(float value)
+    {
+        Debug.Log(value);
     }
 
     private void TMP_InputField(string input)

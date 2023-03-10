@@ -19,6 +19,8 @@ public class SampleData : IData
 
     private Action<string> inputField;
 
+    private Action<float> scrollbar;
+
     private Vector3 localPosition;
 
     private Vector3 localRotation;
@@ -62,4 +64,7 @@ public class SampleData : IData
 
     [Binding("LocalScaleBinding_Image")]
     public Vector3 LocalScale { get => localScale; set => localScale = value; }
+
+    [Binding("Scrollbar")]
+    public Action<float> Scrollbar { get => scrollbar; set => scrollbar = value; }
 }
