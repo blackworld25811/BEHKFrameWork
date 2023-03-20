@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
@@ -8,13 +6,14 @@ namespace BEHKFrameWork.Editor
 {
     public class BEHKFrameWorkSetting : EditorWindow
     {
-        public static string Frame = "-1";
+        private static string Frame = "-1";
 
         public static string UICodePath = "Assets/";
 
         private static GUIContent GUIContent_Frame;
 
         private static GUIContent GUIContent_UICodePath;
+
 
         [MenuItem("BEHKFrameWork/Setting")]
         public static void Open()
@@ -28,7 +27,7 @@ namespace BEHKFrameWork.Editor
             GUIContent_Frame.text = Frame.ToString();
             GUIContent_UICodePath = new GUIContent();
             GUIContent_UICodePath.text = UICodePath;
-            EditorWindow.GetWindow(typeof(BEHKFrameWorkSetting));
+            GetWindow(typeof(BEHKFrameWorkSetting));
         }
 
         private void OnGUI()
@@ -59,10 +58,17 @@ namespace BEHKFrameWork.Editor
             if (saveFrame == null)
             {
                 EditorUserSettings.SetConfigValue(name, value);
+                if (name.Equals(nameof(Frame))) {
+                    PlayerPrefs.SetInt(nameof(Frame), int.Parse(value));
+                }               
                 return value;
             }
             else
             {
+                if (name.Equals(nameof(Frame)))
+                {
+                    PlayerPrefs.SetInt(nameof(Frame), int.Parse(saveFrame));
+                }
                 return saveFrame;
             }
         }
@@ -72,7 +78,9 @@ namespace BEHKFrameWork.Editor
             if (EditorUserSettings.GetConfigValue(name).Equals(value) == false)
             {
                 EditorUserSettings.SetConfigValue(name, value);
+                PlayerPrefs.SetInt("Frame", int.Parse(value));
             }
         }
     }
 }
+#endif

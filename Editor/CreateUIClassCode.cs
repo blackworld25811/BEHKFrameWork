@@ -1,8 +1,5 @@
 # if UNITY_EDITOR
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
-using Codice.CM.Common;
 using UnityEditor;
 using UnityEngine;
 

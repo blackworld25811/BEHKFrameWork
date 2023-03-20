@@ -1,7 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
-using BEHKFrameWork.Editor;
 using UnityEngine;
 
 namespace BEHKFrameWork.Binding
@@ -52,7 +49,11 @@ namespace BEHKFrameWork.Binding
         /// </summary>
         private void Init()
         {
-            int frame = int.Parse(BEHKFrameWorkSetting.GetValue(nameof(BEHKFrameWorkSetting.Frame)));
+            int frame = -1;
+            if (PlayerPrefs.HasKey("Frame"))
+            {
+                frame = PlayerPrefs.GetInt("Frame");
+            }
             if (frame == -1)
             {
                 // the max frame time
