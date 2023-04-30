@@ -46,7 +46,8 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("    {\n");
             stringBuilder.Append("        List<string> array = new List<string>\n");
             stringBuilder.Append("        {\n");
-            stringBuilder.Append("           " + name + ".Init\n");
+            stringBuilder.Append("           " + name + ".Init,\n");
+            stringBuilder.Append("           " + name + ".Pause\n");
             stringBuilder.Append("        };\n");
             stringBuilder.Append("        return array.ToArray();\n");
             stringBuilder.Append("    }\n");
@@ -54,10 +55,20 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("\n");
             stringBuilder.Append("    public void HandleMessage(Message message)\n");
             stringBuilder.Append("    {\n");
+            stringBuilder.Append("        if (data != null)\n");
+            stringBuilder.Append("        {\n");
+            stringBuilder.Append("            if (data.IsPause)\n");
+            stringBuilder.Append("            {\n");
+            stringBuilder.Append("                return;\n");
+            stringBuilder.Append("            }\n");
+            stringBuilder.Append("        }\n");
             stringBuilder.Append("        switch (message.Name)\n");
             stringBuilder.Append("        {\n");
             stringBuilder.Append("            case " + name + ".Init:\n");
             stringBuilder.Append("                Init();\n");
+            stringBuilder.Append("                break;\n");
+            stringBuilder.Append("            case " + name + ".Pause:\n");
+            stringBuilder.Append("                Pause((bool)message.Body);\n");
             stringBuilder.Append("                break;\n");
             stringBuilder.Append("        }\n");
             stringBuilder.Append("    }\n");
@@ -71,6 +82,12 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("    private void Init()\n");
             stringBuilder.Append("    {\n");
             stringBuilder.Append("        data = MessageManager.Instance.GetListenerData(nameof(" + name + "Receiver)) as " + name + "Data;\n");
+            stringBuilder.Append("    }\n");
+            stringBuilder.Append("\n");
+
+            stringBuilder.Append("    private void Pause(bool isPause)\n");
+            stringBuilder.Append("    {\n");
+            stringBuilder.Append("        data.IsPause = isPause;\n");
             stringBuilder.Append("    }\n");
             stringBuilder.Append("\n");
             stringBuilder.Append("    #endregion\n");
@@ -95,6 +112,7 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("\n");
             stringBuilder.Append("public class " + name + "Data : IData\n");
             stringBuilder.Append("{\n");
+            stringBuilder.Append("    public bool IsPause;\n");
             stringBuilder.Append("}\n");
 
             content = stringBuilder.ToString();
