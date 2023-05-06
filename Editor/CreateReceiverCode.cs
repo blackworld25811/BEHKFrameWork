@@ -47,6 +47,7 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("        List<string> array = new List<string>\n");
             stringBuilder.Append("        {\n");
             stringBuilder.Append("           " + name + ".Init,\n");
+            stringBuilder.Append("           " + name + ".Open,\n");
             stringBuilder.Append("           " + name + ".Pause\n");
             stringBuilder.Append("        };\n");
             stringBuilder.Append("        return array.ToArray();\n");
@@ -67,6 +68,9 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("            case " + name + ".Init:\n");
             stringBuilder.Append("                Init();\n");
             stringBuilder.Append("                break;\n");
+            stringBuilder.Append("            case " + name + ".Open:\n");
+            stringBuilder.Append("                Open();\n");
+            stringBuilder.Append("                break;\n");
             stringBuilder.Append("            case " + name + ".Pause:\n");
             stringBuilder.Append("                Pause((bool)message.Body);\n");
             stringBuilder.Append("                break;\n");
@@ -82,6 +86,11 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("    private void Init()\n");
             stringBuilder.Append("    {\n");
             stringBuilder.Append("        data = MessageManager.Instance.GetListenerData(nameof(" + name + "Receiver)) as " + name + "Data;\n");
+            stringBuilder.Append("    }\n");
+            stringBuilder.Append("\n");
+
+            stringBuilder.Append("    private void Open()\n");
+            stringBuilder.Append("    {\n");
             stringBuilder.Append("    }\n");
             stringBuilder.Append("\n");
 
