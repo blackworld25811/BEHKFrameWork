@@ -8,17 +8,18 @@ public class OtherReceiver : IListener
 {
     private OtherData data;
 
-    public  string[] ListMessageInterests()
+    public string[] ListMessageInterests()
     {
         List<string> array = new List<string>
         {
             Other.ChangeData,
-            Other.ChangeDataSecond
+            Other.ChangeDataSecond,
+            Sample.Test
         };
         return array.ToArray();
     }
 
-    public  void HandleMessage(Message message)
+    public void HandleMessage(Message message)
     {
         switch (message.Name)
         {
@@ -28,6 +29,9 @@ public class OtherReceiver : IListener
             case Other.ChangeDataSecond:
                 ChangeDataSecond();
                 break;
+            case Sample.Test:
+                Test();
+                break;
         }
     }
 
@@ -36,11 +40,16 @@ public class OtherReceiver : IListener
         OtherData data = MessageManager.Instance.GetListenerData(nameof(OtherReceiver)) as OtherData;
         //SampleData data = message.Body as SampleData;
         //data.Name = "456";
-       // Debug.Log("ChangeData");
+        // Debug.Log("ChangeData");
     }
 
     private void ChangeDataSecond()
     {
         Debug.Log("ChangeDataSecond");
+    }
+
+    private void Test()
+    {
+        Debug.Log("Test_other");
     }
 }

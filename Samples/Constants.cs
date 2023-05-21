@@ -11,7 +11,8 @@ public class Constants
         public const string Open = nameof(Sample) + nameof(Open);
 
         public const string Close = nameof(Sample) + nameof(Close);
-        
+
+        public const string Test = nameof(Sample) + nameof(Test);
     }
 
     public struct Other

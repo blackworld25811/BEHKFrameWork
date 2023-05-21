@@ -4,6 +4,7 @@ using BEHKFrameWork.Binding;
 using System;
 using System.Reflection;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 
 namespace BEHKFrameWork.Message
 {
@@ -12,7 +13,7 @@ namespace BEHKFrameWork.Message
         /// <summary>
         /// all of observers,one observers can observe multiple message
         /// </summary>
-        private readonly ConcurrentDictionary<string, Observer> observerDictionary;
+        private readonly ConcurrentDictionary<string, List<Observer>> observerDictionary;
         /// <summary>
         /// all of listeners,listener's every message must be have a observer
         /// </summary>
@@ -25,7 +26,7 @@ namespace BEHKFrameWork.Message
 
         public MessageManager()
         {
-            observerDictionary = new ConcurrentDictionary<string, Observer>();
+            observerDictionary = new ConcurrentDictionary<string, List<Observer>>();
             listenerDictionary = new ConcurrentDictionary<string, IListener>();
             dataDictionary = new ConcurrentDictionary<string, IData>();
         }
@@ -84,7 +85,16 @@ namespace BEHKFrameWork.Message
         /// <param name="observer"></param>
         private void RegisterMessage(string messageName, Observer observer)
         {
-            observerDictionary.TryAdd(messageName, observer);
+            if (observerDictionary.TryGetValue(messageName, out var observers))
+            {
+                observers.Add(observer);
+            }
+            else
+            {
+                observers = new List<Observer>();
+                observers.Add(observer);
+                observerDictionary.TryAdd(messageName, observers);
+            }               
         }
 
         /// <summary>
@@ -96,48 +106,40 @@ namespace BEHKFrameWork.Message
         public void SendMessage(string name, string type, object body)
         {
             Message message = new Message(name, type, body);
-
-            if (observerDictionary.TryGetValue(name, out var observer))
-            {
-                observer.Execute(message);
-            }
+            ExecuteMessage(name, message);
         }
 
         public void SendMessage(string name, string type)
         {
             Message message = new Message(name, type, null);
-
-            if (observerDictionary.TryGetValue(name, out var observer))
-            {
-                observer.Execute(message);
-            }
+            ExecuteMessage(name, message);
         }
 
         public void SendMessage(string name, object body)
         {
             Message message = new Message(name, null, body);
-
-            if (observerDictionary.TryGetValue(name, out var observer))
-            {
-                observer.Execute(message);
-            }
+            ExecuteMessage(name, message);
         }
 
         public void SendMessage(string name)
         {
             Message message = new Message(name, null, null);
-
-            if (observerDictionary.TryGetValue(name, out var observer))
-            {
-                observer.Execute(message);
-            }
+            ExecuteMessage(name, message);
         }
 
         public void SendMessage(Message message)
         {
-            if (observerDictionary.TryGetValue(message.Name, out var observer))
+            ExecuteMessage(message.Name, message);
+        }
+
+        private void ExecuteMessage(string name, Message message)
+        {
+            if (observerDictionary.TryGetValue(name, out var observers))
             {
-                observer.Execute(message);
+                foreach (var one in observers)
+                {
+                    one.Execute(message);
+                }
             }
         }
 

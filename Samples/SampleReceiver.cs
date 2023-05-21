@@ -15,6 +15,7 @@ public class SampleReceiver : IListener
             Sample.Init,
             Sample.Open,
             Sample.Close,
+            Sample.Test
         };
         return array.ToArray();
     }
@@ -31,6 +32,9 @@ public class SampleReceiver : IListener
                 break;
             case Sample.Close:
                 Close();
+                break;
+            case Sample.Test:
+                Test();
                 break;
         }
     }
@@ -60,11 +64,17 @@ public class SampleReceiver : IListener
         data.Id = "change";
         data.Active = true;
         data.Active_text_0 = true;
+        MessageManager.Instance.SendMessage(Constants.Sample.Test);
     }
 
     private void Close()
     {
 
+    }
+
+    private void Test()
+    {
+        Debug.Log("Test_sample");
     }
 
     private void Button_0()
