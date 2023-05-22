@@ -58,9 +58,12 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("    {\n");
             stringBuilder.Append("        if (data != null)\n");
             stringBuilder.Append("        {\n");
-            stringBuilder.Append("            if (data.IsPause)\n");
+            stringBuilder.Append("            if (!message.Name.Equals(" + name + ".Pause))\n");
             stringBuilder.Append("            {\n");
-            stringBuilder.Append("                return;\n");
+            stringBuilder.Append("                if (data.IsPause)\n");
+            stringBuilder.Append("                {\n");
+            stringBuilder.Append("                    return;\n");
+            stringBuilder.Append("                {\n");
             stringBuilder.Append("            }\n");
             stringBuilder.Append("        }\n");
             stringBuilder.Append("        switch (message.Name)\n");
