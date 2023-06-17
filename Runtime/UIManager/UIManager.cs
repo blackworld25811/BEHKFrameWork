@@ -40,10 +40,6 @@ namespace BEHKFrameWork.UIManager
                 else
                 {
                     index++;
-                    if (one.Name.Contains(transform.GetChild(index).name) == false)
-                    {
-                        continue;
-                    }
                     Type oneType = type.Assembly.GetType(one.FieldType.FullName);
                     object oneObject = type.Assembly.CreateInstance(one.FieldType.FullName);
                     one.SetValue(instance, oneObject);
