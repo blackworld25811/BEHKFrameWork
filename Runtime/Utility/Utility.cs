@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -107,14 +104,41 @@ namespace BEHKFrameWork.Utility
 
         public static string GetCallClassName()
         {
-            string name = null;
             MethodBase method = new System.Diagnostics.StackTrace().GetFrame(3).GetMethod();
-            name = method.ReflectedType.FullName;
+            string name = method.ReflectedType.FullName;
             // fix async function
             if (name.Contains("Async"))
             {
                 method = new System.Diagnostics.StackTrace().GetFrame(4).GetMethod();
                 name = method.ReflectedType.FullName;
+            }
+            return name;
+        }
+
+        public static string GetRandomName(int length)
+        {
+            string name = "";
+            for (int i = 0; i < length; i++)
+            {
+                if (Random.Range(0, 2) == 0)
+                {
+                    name = name + Random.Range(0, 10);
+                }
+                else
+                {
+                    int letterNumber = Random.Range(0, 26);
+                    string letter;
+                    // caps
+                    if (Random.Range(0, 2) == 0)
+                    {
+                        letter = ((char)('A' + letterNumber)).ToString();
+                    }
+                    else
+                    {
+                        letter = ((char)('a' + letterNumber)).ToString();
+                    }
+                    name = name + letter;
+                }
             }
             return name;
         }
