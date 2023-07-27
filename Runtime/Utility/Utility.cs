@@ -85,17 +85,22 @@ namespace BEHKFrameWork.Utility
 
         public static void ClearAllChild(Transform father, bool isImmediate)
         {
+            ClearChild(father, 0, isImmediate);
+        }
+
+        public static void ClearChild(Transform father, int startIndex, bool isImmediate)
+        {
             if (isImmediate)
             {
                 int count = father.childCount;
-                for (int i = 0; i < count; i++)
+                for (int i = startIndex; i < count; i++)
                 {
                     Object.DestroyImmediate(father.GetChild(0).gameObject);
                 }
             }
             else
             {
-                for (int i = 0; i < father.childCount; i++)
+                for (int i = startIndex; i < father.childCount; i++)
                 {
                     Object.Destroy(father.GetChild(i).gameObject);
                 }
