@@ -8,6 +8,21 @@ namespace BEHKFrameWork.Utility
 {
     public class Utility
     {
+        public static bool IsDebug;
+
+        public static void Log(string content,bool isDebug)
+        {
+            if (IsDebug == false)
+            {
+                return;
+            }
+            if (isDebug == false)
+            {
+                return;
+            }
+            Debug.Log(content);
+        }
+
         public static void WriteFile(string fullPath, string content)
         {
             if (File.Exists(fullPath) == false)
