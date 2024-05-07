@@ -48,6 +48,7 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("        {\n");
             stringBuilder.Append("           " + name + ".Init,\n");
             stringBuilder.Append("           " + name + ".Open,\n");
+            stringBuilder.Append("           " + name + ".Close,\n");
             stringBuilder.Append("           " + name + ".Pause\n");
             stringBuilder.Append("        };\n");
             stringBuilder.Append("        return array.ToArray();\n");
@@ -74,6 +75,9 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("            case " + name + ".Open:\n");
             stringBuilder.Append("                Open();\n");
             stringBuilder.Append("                break;\n");
+            stringBuilder.Append("            case " + name + ".Close:\n");
+            stringBuilder.Append("                Close();\n");
+            stringBuilder.Append("                break;\n");
             stringBuilder.Append("            case " + name + ".Pause:\n");
             stringBuilder.Append("                Pause((bool)message.Body);\n");
             stringBuilder.Append("                break;\n");
@@ -93,6 +97,11 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("\n");
 
             stringBuilder.Append("    private void Open()\n");
+            stringBuilder.Append("    {\n");
+            stringBuilder.Append("    }\n");
+            stringBuilder.Append("\n");
+
+            stringBuilder.Append("    private void Close()\n");
             stringBuilder.Append("    {\n");
             stringBuilder.Append("    }\n");
             stringBuilder.Append("\n");
