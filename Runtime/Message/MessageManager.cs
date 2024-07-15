@@ -46,7 +46,7 @@ namespace BEHKFrameWork.Message
                 var interests = listener.ListMessageInterests();
                 if (interests.Length > 0)
                 {
-                    Observer observer = new Observer(listenerName, listener.HandleMessage);
+                    Observer observer = new Observer(listenerName, listener.HandleMessageAsync);
                     // regsiter every message
                     foreach (var interest in interests)
                     {

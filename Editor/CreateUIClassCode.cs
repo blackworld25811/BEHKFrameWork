@@ -30,6 +30,10 @@ namespace BEHKFrameWork.Editor
 
             foreach (var one in canvas)
             {
+                if (one.gameObject.activeSelf == false)
+                {
+                    continue;
+                }
                 string content = Content(one.transform);
                 Utility.Utility.WriteFile(BEHKFrameWorkSetting.GetValue(nameof(BEHKFrameWorkSetting.UICodePath)) + one.name + ".cs", content);
             }

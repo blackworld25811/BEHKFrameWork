@@ -15,6 +15,6 @@ namespace BEHKFrameWork.Message
         /// message logic
         /// </summary>
         /// <param name="message"></param>
-        void HandleMessage(Message message);
+        void HandleMessageAsync(Message message);
     }
 }

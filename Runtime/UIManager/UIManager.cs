@@ -19,6 +19,10 @@ namespace BEHKFrameWork.UIManager
             Canvas[] canvas = Resources.FindObjectsOfTypeAll<Canvas>();
             foreach (var one in canvas)
             {
+                if (one.gameObject.activeSelf == false)
+                {
+                    continue;
+                }
                 if (one.name.Equals(UIInstance.ToString()))
                 {
                     GetOneCanvasUIGameObject(UIInstance, UIInstance.GetType(), one.transform);
