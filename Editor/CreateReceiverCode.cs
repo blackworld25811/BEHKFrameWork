@@ -55,7 +55,7 @@ namespace BEHKFrameWork.Editor
             stringBuilder.Append("    }\n");
 
             stringBuilder.Append("\n");
-            stringBuilder.Append("    public void HandleMessage(Message message)\n");
+            stringBuilder.Append("    public void HandleMessageAsync(Message message)\n");
             stringBuilder.Append("    {\n");
             stringBuilder.Append("        if (data != null)\n");
             stringBuilder.Append("        {\n");

@@ -10,7 +10,7 @@ namespace BEHKFrameWork.Utility
     {
         public static bool IsDebug;
 
-        public static void Log(string content,bool isDebug)
+        public static void Log(string content, bool isDebug)
         {
             if (IsDebug == false)
             {
@@ -98,7 +98,7 @@ namespace BEHKFrameWork.Utility
             return time;
         }
 
-        public static void ClearAllChild(Transform father, bool isImmediate)
+        public static void ClearTotalChild(Transform father, bool isImmediate)
         {
             ClearChild(father, 0, isImmediate);
         }
@@ -119,6 +119,19 @@ namespace BEHKFrameWork.Utility
                 {
                     Object.Destroy(father.GetChild(i).gameObject);
                 }
+            }
+        }
+
+        public static void SetTotalChildActive(Transform father, bool active)
+        {
+            SetChildActive(father, 0, active);
+        }
+
+        public static void SetChildActive(Transform father, int startIndex, bool active)
+        {
+            for (int i = startIndex; i < father.childCount; i++)
+            {
+                father.GetChild(i).gameObject.SetActive(active);
             }
         }
 
