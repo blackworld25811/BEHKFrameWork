@@ -25,7 +25,7 @@ namespace BEHKFrameWork.Binding
             get
             {
                 if (instance != null) return instance;
-                instance = (BindingUpdate)FindObjectOfType(typeof(BindingUpdate));
+                instance = (BindingUpdate)FindFirstObjectByType(typeof(BindingUpdate));
                 if (instance != null) return instance;
                 var obj = new GameObject
                 {

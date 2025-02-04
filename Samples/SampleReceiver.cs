@@ -20,7 +20,7 @@ public class SampleReceiver : IListener
         return array.ToArray();
     }
 
-    public void HandleMessage(Message message)
+    public void HandleMessageAsync(Message message)
     {
         switch (message.Name)
         {
